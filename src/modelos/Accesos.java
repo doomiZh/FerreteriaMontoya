@@ -4,10 +4,58 @@
  */
 package modelos;
 
+import java.util.Date;
+
 /**
  * Clase donde almacena los Accesos de la base de datos
  * @author grupo
  */
 public class Accesos {
-    
-}
+    private int idAcceso;
+    private String usuario;
+    private Date fechaAcceso;
+    private String ip;
+
+    public Accesos() {
+    }
+
+    public Accesos(int idAcceso, String usuario, Date fechaAcceso, String ip) {
+        this.idAcceso = idAcceso;
+        this.usuario = usuario;
+        this.fechaAcceso = fechaAcceso;
+        this.ip = ip;
+    }
+
+    public int getIdAcceso() {
+        return idAcceso;
+    }
+
+    public void setIdAcceso(int idAcceso) {
+        this.idAcceso = idAcceso;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public Date getFechaAcceso() {
+        return fechaAcceso;
+    }
+
+    public void setFechaAcceso(Date fechaAcceso) {
+        this.fechaAcceso = fechaAcceso;
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
+
+}// End Class
