@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.table.DefaultTableModel;
 
 /**
  * Clase donde almacena la conexion con la base de datos
@@ -42,6 +43,7 @@ public class Conexion {
     public static void Cerrar(){
         try {
             conn.close();
+            System.out.println("Conexion cerrada");
         } catch (SQLException ex) {
             System.getLogger(Conexion.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
@@ -96,6 +98,37 @@ public class Conexion {
             Cerrar();
         }
         return tipo;
+    }
+    
+    /**
+     * Método para obtener los ultimos tres articulos registrados en la tabla de productos
+     * y asi imprimiendo en un modelo de tabla para asi mostrar
+     * el codigo del producto, nombre del articulo, su categoria, el precio de venta
+     * y el stock ordenado por la fecha de alta de manera descendente
+     * @param modelo Modelo de tabla donde se tendra que mostrar estos datos
+     */
+    public static void ObtenerUltimosTresArticulos(DefaultTableModel modelo){
+        Object datos[] = new Object[5];
+        String consulta = "select codProducto, nombre, categoria, precio_venta, stock from producto " +
+                "order by fecha_alta desc " +
+                "limit 3";
+        Conectar();
+        try {
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(consulta);
+            while (rs.next()) {
+                datos[0] = rs.getString(1);
+                datos[1] = rs.getString(2);
+                datos[2] = rs.getString(3);
+                datos[3] = rs.getDouble(4);
+                datos[4] = rs.getInt(5);
+                modelo.addRow(datos);
+            }
+        } catch (SQLException ex) {
+            System.getLogger(Conexion.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } finally {
+            Cerrar();
+        }
     }
     
 }// End Class
