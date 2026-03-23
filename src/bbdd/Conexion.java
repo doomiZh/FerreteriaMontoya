@@ -29,7 +29,7 @@ public class Conexion {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             conn = DriverManager.getConnection("jdbc:mysql://localhost/proyectoferreteria",
-                    "root","mysql");
+                    "root","");
             System.out.println("Conexion abierta");
         } catch (ClassNotFoundException | SQLException ex) {
             System.getLogger(Conexion.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
