@@ -9,6 +9,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  * Clase donde almacena la conexion con la base de datos
@@ -72,6 +73,29 @@ public class Conexion {
         return false;
     }
     
-    
+    /**
+     * Método para recuperar el tipo de usuario logado si es User o si es Admin
+     * @param user Usuario logado correcto
+     * @return tipo del usuario logado
+     */
+    public static String RecuperarTipo(String user){
+        String tipo = "";
+        String consulta = "SELECT tipo FROM usuarios WHERE usuario = '"+user+"'";
+        Conectar();
+        try {
+            Statement st;
+            ResultSet rs;
+            st = conn.createStatement();
+            rs = st.executeQuery(consulta);
+            if(rs.next()){
+                tipo = rs.getString(1);
+            }
+        } catch (SQLException ex) {
+            System.getLogger(Conexion.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } finally {
+            Cerrar();
+        }
+        return tipo;
+    }
     
 }// End Class
