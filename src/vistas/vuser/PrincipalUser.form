@@ -203,21 +203,33 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Ver listado total de art&#xed;culos"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnOpcionUnoActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btnOpcionDos">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Ver listado de art&#xed;culos en oferta"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnOpcionDosActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btnOpcionTres">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Ver listado de art&#xed;culos descartados"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnOpcionTresActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btnOpcionCuatro">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Ver datos de su cuenta"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnOpcionCuatroActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>

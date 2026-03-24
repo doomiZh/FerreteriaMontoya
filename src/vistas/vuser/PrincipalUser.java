@@ -69,12 +69,16 @@ public class PrincipalUser extends javax.swing.JFrame {
         panelOpciones.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         btnOpcionUno.setText("Ver listado total de artículos");
+        btnOpcionUno.addActionListener(this::btnOpcionUnoActionPerformed);
 
         btnOpcionDos.setText("Ver listado de artículos en oferta");
+        btnOpcionDos.addActionListener(this::btnOpcionDosActionPerformed);
 
         btnOpcionTres.setText("Ver listado de artículos descartados");
+        btnOpcionTres.addActionListener(this::btnOpcionTresActionPerformed);
 
         btnOpcionCuatro.setText("Ver datos de su cuenta");
+        btnOpcionCuatro.addActionListener(this::btnOpcionCuatroActionPerformed);
 
         javax.swing.GroupLayout panelOpcionesLayout = new javax.swing.GroupLayout(panelOpciones);
         panelOpciones.setLayout(panelOpcionesLayout);
@@ -199,6 +203,26 @@ public class PrincipalUser extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnOpcionUnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpcionUnoActionPerformed
+        ListaArticulo v = new ListaArticulo(this, true);
+        v.setVisible(true);
+    }//GEN-LAST:event_btnOpcionUnoActionPerformed
+
+    private void btnOpcionDosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpcionDosActionPerformed
+        ListaArticulosDestacados v = new ListaArticulosDestacados(this, true);
+        v.setVisible(true);
+    }//GEN-LAST:event_btnOpcionDosActionPerformed
+
+    private void btnOpcionTresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpcionTresActionPerformed
+        ListaArticulosOferta v = new ListaArticulosOferta(this, true);
+        v.setVisible(true);
+    }//GEN-LAST:event_btnOpcionTresActionPerformed
+
+    private void btnOpcionCuatroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpcionCuatroActionPerformed
+        DatosCuentas v = new DatosCuentas(this, true);
+        v.setVisible(true);
+    }//GEN-LAST:event_btnOpcionCuatroActionPerformed
 
     /**
      * @param args the command line arguments

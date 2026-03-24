@@ -8,14 +8,14 @@ package vistas.vuser;
  *
  * @author Marco Antonio
  */
-public class ListaAsticulosDestacados extends javax.swing.JDialog {
+public class ListaArticulosDestacados extends javax.swing.JDialog {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ListaAsticulosDestacados.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ListaArticulosDestacados.class.getName());
 
     /**
      * Creates new form ListaAsticulosDestacados
      */
-    public ListaAsticulosDestacados(java.awt.Frame parent, boolean modal) {
+    public ListaArticulosDestacados(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -387,7 +387,7 @@ public class ListaAsticulosDestacados extends javax.swing.JDialog {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                ListaAsticulosDestacados dialog = new ListaAsticulosDestacados(new javax.swing.JFrame(), true);
+                ListaArticulosDestacados dialog = new ListaArticulosDestacados(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
