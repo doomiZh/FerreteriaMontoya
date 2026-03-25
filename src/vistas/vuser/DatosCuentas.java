@@ -62,7 +62,7 @@ public class DatosCuentas extends javax.swing.JDialog {
         jPanel2.setBackground(new java.awt.Color(0, 0, 0));
 
         panelCampos.setBackground(new java.awt.Color(255, 255, 0));
-        panelCampos.setBorder(javax.swing.BorderFactory.createLineBorder(null));
+        panelCampos.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setText("Nombre:");
@@ -188,6 +188,7 @@ public class DatosCuentas extends javax.swing.JDialog {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     /**

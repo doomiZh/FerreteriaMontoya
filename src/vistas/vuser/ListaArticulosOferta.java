@@ -66,6 +66,7 @@ public class ListaArticulosOferta extends javax.swing.JDialog {
         btnEliminar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("LISTA DE ARTICULOS EN OFERTA");
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 0, 0));
@@ -149,11 +150,13 @@ public class ListaArticulosOferta extends javax.swing.JDialog {
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel11.setText("DESTACADO:");
 
+        cboDestacado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "SI", "NO" }));
         cboDestacado.setEnabled(false);
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel12.setText("OFERTA:");
 
+        cboOferta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "SI", "NO" }));
         cboOferta.setEnabled(false);
 
         btnActualizar.setText("Actualizar");

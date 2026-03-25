@@ -150,11 +150,13 @@ public class ListaArticulosDestacados extends javax.swing.JDialog {
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel11.setText("DESTACADO:");
 
+        cboDestacado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "SI", "NO" }));
         cboDestacado.setEnabled(false);
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel12.setText("OFERTA:");
 
+        cboOferta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "SI", "NO" }));
         cboOferta.setEnabled(false);
 
         btnActualizar.setText("Actualizar");
