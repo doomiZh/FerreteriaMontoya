@@ -101,6 +101,13 @@ public class Conexion {
         return tipo;
     }
     
+    /* ACCESOS */
+    
+    
+    
+    
+    /* PANTALLA PRINCIPAL */
+    
     /**
      * Método para obtener los ultimos tres articulos registrados en la tabla de productos
      * y asi imprimiendo en un modelo de tabla para asi mostrar
@@ -273,7 +280,6 @@ public class Conexion {
             Cerrar();
         }
     }
-    
     
     
     
