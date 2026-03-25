@@ -32,7 +32,7 @@ public class Conexion {
     public static void Conectar(){
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://localhost/proyectoferreteria",
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3307/proyectoferreteria",
                     "root","");
             System.out.println("Conexion abierta");
         } catch (ClassNotFoundException | SQLException ex) {
@@ -104,6 +104,12 @@ public class Conexion {
     }
     
     /* ACCESOS */
+    /**
+     * Método para registrar los accesos del usuario donde registra el nombre de usuario,
+     * fecha de acceso, y la conexion ip del usuario a cual ingresa al programa
+     * @param cli Clase Accesos del proyecto donde se almacena el acceso
+     * @return true si se registro el acceso de un usuario.
+     */
     public static boolean RegistrarAccesos(Accesos cli) {
         String consulta = "INSERT INTO accesos (usuario, fecha, ip) VALUES (?, ?, ?)";
         Conectar();
@@ -298,6 +304,19 @@ public class Conexion {
         }
     }
     
-    
+    public static void MostrarFormulario(String codigo) {
+        String consulta = "select codProducto, nombre, categoria, descripcion, precio_compra, precio_venta, stock, origen, destacado, oferta from producto "
+                        + "where codProducto = '"+codigo+"'";
+        try {
+            PreparedStatement ps = conn.prepareStatement(consulta);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                txtCodProducto.setText(rs.getString(1));
+            }
+        } catch (SQLException ex) {
+            System.getLogger(Conexion.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+        
+    }
     
 }// End Class
