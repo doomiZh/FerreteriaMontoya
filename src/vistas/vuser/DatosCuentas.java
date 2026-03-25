@@ -50,6 +50,7 @@ public class DatosCuentas extends javax.swing.JDialog {
         pfContrasenya = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("DATOS DE LA CUENTA");
 
         panelFondo.setBackground(new java.awt.Color(255, 0, 0));
 
@@ -57,7 +58,6 @@ public class DatosCuentas extends javax.swing.JDialog {
         jLabel1.setText("MI CUENTA");
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/logo_ferreteria_150_82.png"))); // NOI18N
-        jLabel2.setText("jLabel2");
 
         jPanel2.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -157,20 +157,20 @@ public class DatosCuentas extends javax.swing.JDialog {
         panelFondoLayout.setHorizontalGroup(
             panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelFondoLayout.createSequentialGroup()
-                .addGap(58, 58, 58)
-                .addComponent(jLabel1)
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34))
+                .addComponent(jLabel2)
+                .addContainerGap())
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         panelFondoLayout.setVerticalGroup(
             panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelFondoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel1))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(3, 3, 3)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
