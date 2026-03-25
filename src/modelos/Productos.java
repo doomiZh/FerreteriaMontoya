@@ -35,6 +35,19 @@ public class Productos {
         this.fechaAlta = fechaAlta;
     }
 
+    public Productos(String nombre, String categoria, String descripcion, 
+            double precioVenta, double precioCompra, int stock, String origen, String destacado, String oferta) {
+        this.nombre = nombre;
+        this.categoria = categoria;
+        this.descripcion = descripcion;
+        this.precioVenta = precioVenta;
+        this.precioCompra = precioCompra;
+        this.stock = stock;
+        this.origen = origen;
+        this.destacado = destacado;
+        this.oferta = oferta;
+    }
+
     public String getCodigo() {
         return codigo;
     }

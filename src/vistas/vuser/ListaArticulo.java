@@ -6,6 +6,7 @@ package vistas.vuser;
 
 import bbdd.Conexion;
 import javax.swing.table.DefaultTableModel;
+import modelos.Productos;
 
 /**
  *
@@ -340,8 +341,6 @@ public class ListaArticulo extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tbArticulosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbArticulosMouseClicked
-        int fila = tbArticulos.getSelectedRow();
-        String codigo = tbArticulos.getValueAt(fila, 0).toString();
         // MostrarFormulario(codigo);
     }//GEN-LAST:event_tbArticulosMouseClicked
 
@@ -414,19 +413,15 @@ public class ListaArticulo extends javax.swing.JDialog {
     private javax.swing.JTextField txtPrecioVenta;
     private javax.swing.JTextField txtStock;
     // End of variables declaration//GEN-END:variables
-
-    public void MostrarInformacion(String codigo){
-        String cod = txtCodProducto.getText();
-        String nom = txtNombre.getText();
-        int cat = cboCategoria.getSelectedIndex();
-        String desc = txtAreaDescripcion.getText();
-        double pv = Double.parseDouble(txtPrecioVenta.getText());
-        double pc = Double.parseDouble(txtPrecioCompra.getText());
-        int q = Integer.parseInt(txtStock.getText());
-        int ori = cboOrigen.getSelectedIndex();
-        int des = cboDestacado.getSelectedIndex();
-        int ofr = cboOferta.getSelectedIndex();
         
+    public void MostrarInformacion(){
+        int fila = tbArticulos.getSelectedRow();
+        String codigo = tbArticulos.getValueAt(fila, 0).toString();
+        
+        Conexion.Conectar();
+        Productos pd = Conexion.MostrarFormulario(codigo);
+        
+        txtNombre.setText(pd.getNombre());
     }
 
 
