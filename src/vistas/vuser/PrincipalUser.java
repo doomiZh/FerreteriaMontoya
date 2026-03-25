@@ -71,10 +71,10 @@ public class PrincipalUser extends javax.swing.JFrame {
         btnOpcionUno.setText("Ver listado total de artículos");
         btnOpcionUno.addActionListener(this::btnOpcionUnoActionPerformed);
 
-        btnOpcionDos.setText("Ver listado de artículos en oferta");
+        btnOpcionDos.setText("Ver listado de artículos destacados");
         btnOpcionDos.addActionListener(this::btnOpcionDosActionPerformed);
 
-        btnOpcionTres.setText("Ver listado de artículos descartados");
+        btnOpcionTres.setText("Ver listado de artículos en oferta");
         btnOpcionTres.addActionListener(this::btnOpcionTresActionPerformed);
 
         btnOpcionCuatro.setText("Ver datos de su cuenta");
@@ -86,13 +86,13 @@ public class PrincipalUser extends javax.swing.JFrame {
             panelOpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelOpcionesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelOpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnOpcionUno, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnOpcionDos))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(panelOpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnOpcionTres, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnOpcionCuatro, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(panelOpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnOpcionDos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnOpcionUno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addGroup(panelOpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnOpcionCuatro, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
+                    .addComponent(btnOpcionTres, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         panelOpcionesLayout.setVerticalGroup(

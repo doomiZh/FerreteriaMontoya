@@ -167,14 +167,14 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="btnOpcionUno" min="-2" pref="203" max="-2" attributes="0"/>
-                              <Component id="btnOpcionDos" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="btnOpcionDos" max="32767" attributes="0"/>
+                              <Component id="btnOpcionUno" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="btnOpcionTres" alignment="1" min="-2" max="-2" attributes="0"/>
-                              <Component id="btnOpcionCuatro" alignment="1" min="-2" pref="219" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="btnOpcionCuatro" pref="219" max="32767" attributes="0"/>
+                              <Component id="btnOpcionTres" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -209,7 +209,7 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="btnOpcionDos">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Ver listado de art&#xed;culos en oferta"/>
+                    <Property name="text" type="java.lang.String" value="Ver listado de art&#xed;culos destacados"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnOpcionDosActionPerformed"/>
@@ -217,7 +217,7 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="btnOpcionTres">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Ver listado de art&#xed;culos descartados"/>
+                    <Property name="text" type="java.lang.String" value="Ver listado de art&#xed;culos en oferta"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnOpcionTresActionPerformed"/>
