@@ -105,7 +105,7 @@ public class Conexion {
     
     /* ACCESOS */
     public static boolean RegistrarAccesos(Accesos cli) {
-        String consulta = "INSERT INTO accesos (usuario, ip, fecha) VALUES (?, ?, ?)";
+        String consulta = "INSERT INTO accesos (usuario, fecha, ip) VALUES (?, ?, ?)";
         Conectar();
         try {
             PreparedStatement st = conn.prepareStatement(consulta);
