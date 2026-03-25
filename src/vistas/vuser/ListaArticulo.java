@@ -131,7 +131,7 @@ public class ListaArticulo extends javax.swing.JDialog {
         cboCategoria.setEnabled(false);
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel8.setText("Descripcion:");
+        jLabel8.setText("DESCRIPCION:");
 
         txtAreaDescripcion.setColumns(20);
         txtAreaDescripcion.setLineWrap(true);
@@ -300,7 +300,7 @@ public class ListaArticulo extends javax.swing.JDialog {
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelDatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout panelFondoLayout = new javax.swing.GroupLayout(panelFondo);
@@ -319,11 +319,11 @@ public class ListaArticulo extends javax.swing.JDialog {
             .addGroup(panelFondoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(imagen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(imagen, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelArticulo, javax.swing.GroupLayout.PREFERRED_SIZE, 459, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26))
+                .addComponent(panelArticulo, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -415,6 +415,11 @@ public class ListaArticulo extends javax.swing.JDialog {
     private javax.swing.JTextField txtStock;
     // End of variables declaration//GEN-END:variables
         
+    /**
+     * Método para mostrar información en el formulario en caso el usuario haya
+     * pulsado en una fila asi obteniendo el codigo y llamando a la conexion donde imprime
+     * los datos completos del artículo
+     */
     public void MostrarInformacion(){
         int fila = tbArticulos.getSelectedRow();
         String codigo = tbArticulos.getValueAt(fila, 0).toString();
@@ -431,7 +436,6 @@ public class ListaArticulo extends javax.swing.JDialog {
         cboOrigen.setSelectedItem(pd.getOrigen());
         cboDestacado.setSelectedItem(pd.getDestacado());
         cboOferta.setSelectedItem(pd.getOferta());
-    }   
+    }
 
-
-}
+}// End view
