@@ -111,7 +111,7 @@ public class Conexion {
      * @return true si se registro el acceso de un usuario.
      */
     public static boolean RegistrarAccesos(Accesos cli) {
-        String consulta = "INSERT INTO accesos (usuario, fecha, ip) VALUES (?, ?, ?)";
+        String consulta = "INSERT INTO accesos (usuario, ip, fecha) VALUES (?, ?, ?)";
         Conectar();
         try {
             PreparedStatement st = conn.prepareStatement(consulta);
