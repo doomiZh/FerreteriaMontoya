@@ -14,6 +14,7 @@ import java.sql.Statement;
 import javax.swing.JComboBox;
 import javax.swing.table.DefaultTableModel;
 import modelos.Accesos;
+import modelos.Productos;
 
 /**
  * Clase donde almacena la conexion con la base de datos
@@ -32,7 +33,7 @@ public class Conexion {
     public static void Conectar(){
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3307/proyectoferreteria",
+            conn = DriverManager.getConnection("jdbc:mysql://localhost/proyectoferreteria",
                     "root","");
             System.out.println("Conexion abierta");
         } catch (ClassNotFoundException | SQLException ex) {
@@ -111,7 +112,7 @@ public class Conexion {
      * @return true si se registro el acceso de un usuario.
      */
     public static boolean RegistrarAccesos(Accesos cli) {
-        String consulta = "INSERT INTO accesos (usuario, ip, fecha) VALUES (?, ?, ?)";
+        String consulta = "INSERT INTO accesos (usuario, fecha, ip) VALUES (?, ?, ?)";
         Conectar();
         try {
             PreparedStatement st = conn.prepareStatement(consulta);
@@ -304,19 +305,41 @@ public class Conexion {
         }
     }
     
-    public static void MostrarFormulario(String codigo) {
-        String consulta = "select codProducto, nombre, categoria, descripcion, precio_compra, precio_venta, stock, origen, destacado, oferta from producto "
+    /**
+     * Método para mostrar el formulario de cada artículo donde almacena el nombre,
+     * categoria, descripcion, precio de compra, precio de venta, stock (cantidad),
+     * origen, si es destacado y si es oferta.
+     * @param codigo Codigo del producto que esta seleccionado
+     * @return Información del producto almacenado por cada columna distribuida en orden de envio de 
+     * la consulta.
+     */
+    public static Productos MostrarFormulario(String codigo) {
+        Productos p = null;
+        String consulta = "select nombre, categoria, descripcion, precio_compra, precio_venta, stock, origen, destacado, oferta from producto "
                         + "where codProducto = '"+codigo+"'";
+        Conectar();
         try {
             PreparedStatement ps = conn.prepareStatement(consulta);
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
-                txtCodProducto.setText(rs.getString(1));
+                p = new Productos(
+                rs.getString(1),
+                rs.getString(2),
+                rs.getString(3),
+                rs.getDouble(4),
+                rs.getDouble(5),
+                rs.getInt(6),
+                rs.getString(7),
+                rs.getString(8),
+                rs.getString(9)
+                );
             }
         } catch (SQLException ex) {
             System.getLogger(Conexion.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } finally {
+            Cerrar();
         }
-        
+        return p;
     }
     
 }// End Class
