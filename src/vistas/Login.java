@@ -199,7 +199,8 @@ public class Login extends javax.swing.JFrame {
     /**
      * Método para iniciar logado con el usuario y contraseña, revisamos si usuario es
      * tipo admin o user abre distintas ventanas, en caso que no emite un mensaje
-     * de que el usuario no existe y se limpian los campos
+     * de que el usuario no existe y se limpian los campos.
+     * Además se inserta los accesos de los usuarios en la tabla de accesos de la bbdd.
      */
     public void IniciarSesion(){
         usuario = txtUsuario.getText();
@@ -212,7 +213,6 @@ public class Login extends javax.swing.JFrame {
             switch (tipoUsuario) {
                 case "user" -> {
                     JOptionPane.showMessageDialog(this, "Usuario logado. Bienvenido "+usuario);
-                    // Metodo insertar acceso
                     PrincipalUser u = new PrincipalUser();
                     u.setExtendedState(MAXIMIZED_BOTH);
                     u.setVisible(true);
@@ -220,7 +220,6 @@ public class Login extends javax.swing.JFrame {
                 }
                 case "admin" -> {
                     JOptionPane.showMessageDialog(this, "Administrador logado. Bienvenido "+usuario);
-                    // Metodo insertar acceso
                     PrincipalAdmin a = new PrincipalAdmin();
                     a.setExtendedState(MAXIMIZED_BOTH);
                     a.setVisible(true);
@@ -234,6 +233,11 @@ public class Login extends javax.swing.JFrame {
             pfContrasenya.setText("");
         }
     }
+    /**
+     * Método para registrar la IP obteniendo el localhost de la ip y direccion para 
+     * almacenarlo en una cadena de texto.
+     * @return Cadena de texto de una conexion IP
+     */
     public String RegistrarIp() {
         String ip = null;
         try {
