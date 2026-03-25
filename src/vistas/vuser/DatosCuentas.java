@@ -4,10 +4,13 @@
  */
 package vistas.vuser;
 
+import bbdd.Conexion;
 import java.awt.Color;
 import java.awt.Component;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import modelos.Usuarios;
+import vistas.Login;
 
 /**
  *
@@ -23,6 +26,7 @@ public class DatosCuentas extends javax.swing.JDialog {
     public DatosCuentas(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        MostrarDatosUsuario();
     }
 
     /**
@@ -40,12 +44,10 @@ public class DatosCuentas extends javax.swing.JDialog {
         jPanel2 = new javax.swing.JPanel();
         panelCampos = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         btnActualizar = new javax.swing.JButton();
         txtNombre = new javax.swing.JTextField();
-        txtApellidos = new javax.swing.JTextField();
         txtUsuario = new javax.swing.JTextField();
         pfContrasenya = new javax.swing.JPasswordField();
 
@@ -55,6 +57,7 @@ public class DatosCuentas extends javax.swing.JDialog {
         panelFondo.setBackground(new java.awt.Color(255, 0, 0));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("MI CUENTA");
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/logo_ferreteria_150_82.png"))); // NOI18N
@@ -65,10 +68,7 @@ public class DatosCuentas extends javax.swing.JDialog {
         panelCampos.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel3.setText("Nombre:");
-
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel4.setText("Apellidos:");
+        jLabel3.setText("Nombre y Apellidos:");
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel5.setText("Usuario:");
@@ -78,9 +78,7 @@ public class DatosCuentas extends javax.swing.JDialog {
 
         btnActualizar.setText("Actualizar");
 
-        txtNombre.setName("NOMBRE"); // NOI18N
-
-        txtApellidos.setName("APELLIDOS"); // NOI18N
+        txtNombre.setName("NOMBRE COMPLETO"); // NOI18N
 
         txtUsuario.setEditable(false);
         txtUsuario.setName("USUARIO"); // NOI18N
@@ -92,24 +90,21 @@ public class DatosCuentas extends javax.swing.JDialog {
         panelCamposLayout.setHorizontalGroup(
             panelCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelCamposLayout.createSequentialGroup()
+                .addGap(44, 44, 44)
                 .addGroup(panelCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelCamposLayout.createSequentialGroup()
-                        .addGap(44, 44, 44)
-                        .addGroup(panelCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5))
-                        .addGap(107, 107, 107)
-                        .addGroup(panelCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtNombre)
-                            .addComponent(txtApellidos)
-                            .addComponent(txtUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
-                            .addComponent(pfContrasenya)))
-                    .addGroup(panelCamposLayout.createSequentialGroup()
-                        .addGap(250, 250, 250)
-                        .addComponent(btnActualizar)))
-                .addContainerGap(143, Short.MAX_VALUE))
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel5))
+                .addGap(18, 18, 18)
+                .addGroup(panelCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtNombre)
+                    .addComponent(txtUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
+                    .addComponent(pfContrasenya))
+                .addContainerGap(26, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCamposLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnActualizar)
+                .addGap(126, 126, 126))
         );
         panelCamposLayout.setVerticalGroup(
             panelCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -118,15 +113,11 @@ public class DatosCuentas extends javax.swing.JDialog {
                 .addGroup(panelCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(49, 49, 49)
-                .addGroup(panelCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(txtApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(43, 43, 43)
+                .addGap(35, 35, 35)
                 .addGroup(panelCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42)
+                .addGap(35, 35, 35)
                 .addGroup(panelCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(pfContrasenya, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -139,17 +130,17 @@ public class DatosCuentas extends javax.swing.JDialog {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(148, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(214, 214, 214)
                 .addComponent(panelCampos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(123, 123, 123))
+                .addContainerGap(215, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(55, 55, 55)
+                .addGap(58, 58, 58)
                 .addComponent(panelCampos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addContainerGap(85, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout panelFondoLayout = new javax.swing.GroupLayout(panelFondo);
@@ -173,7 +164,7 @@ public class DatosCuentas extends javax.swing.JDialog {
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(3, 3, 3)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -233,18 +224,18 @@ public class DatosCuentas extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel panelCampos;
     private javax.swing.JPanel panelFondo;
     private javax.swing.JPasswordField pfContrasenya;
-    private javax.swing.JTextField txtApellidos;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 
+    String userLogado;
+    
     /**
      * Método que comprueba los campos de texto si estan vacios o no, en caso cuyo este vacio un
      * campo se mandara una alerta al usuario para que rellene los campos y 
@@ -263,6 +254,18 @@ public class DatosCuentas extends javax.swing.JDialog {
             }
         }
         return true;
+    }
+    
+    /**
+     * Método para imprimir los datos de usuario en los campos de nombre completo,
+     * nombre de usuario y contraseña
+     */
+    public void MostrarDatosUsuario(){
+        userLogado = Login.usuario;
+        Usuarios u = Conexion.MostrarFormularioUsuarios(userLogado);
+        txtNombre.setText(u.getNombresCompletos());
+        txtUsuario.setText(u.getUsuario());
+        pfContrasenya.setText(u.getPass());
     }
 
 }// End View

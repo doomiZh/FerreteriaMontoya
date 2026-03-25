@@ -15,6 +15,7 @@ import javax.swing.JComboBox;
 import javax.swing.table.DefaultTableModel;
 import modelos.Accesos;
 import modelos.Productos;
+import modelos.Usuarios;
 
 /**
  * Clase donde almacena la conexion con la base de datos
@@ -61,7 +62,7 @@ public class Conexion {
      * @return true de un user logado.
      */
     public static boolean Acceder(String user, String pass){
-        String consulta = "SELECT usuario, pass FROM usuarios where usuario=? and pass=?";
+        String consulta = "SELECT usuario, pass FROM usuarios where usuario=? and pass=? and estado ='activo'";
         Conectar();
         try {
             PreparedStatement ps;
@@ -313,7 +314,7 @@ public class Conexion {
      * @return Información del producto almacenado por cada columna distribuida en orden de envio de 
      * la consulta.
      */
-    public static Productos MostrarFormulario(String codigo) {
+    public static Productos MostrarFormularioArticulo(String codigo) {
         Productos p = null;
         String consulta = "select nombre, categoria, descripcion, precio_compra, precio_venta, stock, origen, destacado, oferta from producto "
                         + "where codProducto = '"+codigo+"'";
@@ -340,6 +341,30 @@ public class Conexion {
             Cerrar();
         }
         return p;
+    }
+    
+    /**
+     * Método para mostrar la informacion del usuario logado llamando al nombre y apellidos,
+     * usuario y contraseña del usuario.
+     * @param user Usuario logado para enviar a la consulta su resultado
+     * @return listado de datos de usuario para imprimirlo en los campos
+     */
+    public static Usuarios MostrarFormularioUsuarios(String user){
+        Usuarios u = null;
+        String consulta = "select nombre_apellidos, usuario, pass from usuarios where usuario='"+user+"'";
+        Conectar();
+        try {
+            PreparedStatement ps = conn.prepareStatement(consulta);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()){
+                u = new Usuarios(rs.getString(1), rs.getString(2), rs.getString(3));
+            }
+        } catch (SQLException ex) {
+            System.getLogger(Conexion.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } finally {
+            Cerrar();
+        }
+        return u;
     }
     
 }// End Class
