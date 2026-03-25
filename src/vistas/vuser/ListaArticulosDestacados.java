@@ -426,7 +426,7 @@ public class ListaArticulosDestacados extends javax.swing.JDialog {
         int fila = tbArticulos.getSelectedRow();
         String codigo = tbArticulos.getValueAt(fila, 0).toString();
 
-        Productos pd = Conexion.MostrarFormulario(codigo);
+        Productos pd = Conexion.MostrarFormularioArticulo(codigo);
         
         txtCodProducto.setText(codigo);
         txtNombre.setText(pd.getNombre());
