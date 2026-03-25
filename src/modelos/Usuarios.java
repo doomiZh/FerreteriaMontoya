@@ -13,15 +13,14 @@ import java.util.Date;
  * @author grupo
  */
 public class Usuarios {
-    private String nombre, apellidos, tienda, usuario, pass, tipo, estado;
+    private String nombresCompletos, tienda, usuario, pass, tipo, estado;
     private Date fechaAlta;
 
     public Usuarios() {
-    }
+    }   
 
-    public Usuarios(String nombre, String apellidos, String tienda, String usuario, String pass, String tipo, String estado, Date fechaAlta) {
-        this.nombre = nombre;
-        this.apellidos = apellidos;
+    public Usuarios(String nombresCompletos, String tienda, String usuario, String pass, String tipo, String estado, Date fechaAlta) {
+        this.nombresCompletos = nombresCompletos;
         this.tienda = tienda;
         this.usuario = usuario;
         this.pass = pass;
@@ -30,20 +29,18 @@ public class Usuarios {
         this.fechaAlta = fechaAlta;
     }
 
-    public String getNombre() {
-        return nombre;
+    public Usuarios(String nombresCompletos, String usuario, String pass) {
+        this.nombresCompletos = nombresCompletos;
+        this.usuario = usuario;
+        this.pass = pass;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public String getNombresCompletos() {
+        return nombresCompletos;
     }
 
-    public String getApellidos() {
-        return apellidos;
-    }
-
-    public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
+    public void setNombresCompletos(String nombresCompletos) {
+        this.nombresCompletos = nombresCompletos;
     }
 
     public String getTienda() {
