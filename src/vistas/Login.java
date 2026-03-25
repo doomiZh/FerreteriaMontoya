@@ -5,7 +5,11 @@
 package vistas;
 
 import bbdd.Conexion;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.Date;
 import javax.swing.JOptionPane;
+import modelos.Accesos;
 import vistas.vadmin.PrincipalAdmin;
 import vistas.vuser.PrincipalUser;
 
@@ -202,6 +206,9 @@ public class Login extends javax.swing.JFrame {
         pass = new String(pfContrasenya.getPassword());
         if(Conexion.Acceder(usuario, pass)){
             tipoUsuario = Conexion.RecuperarTipo(usuario);
+            Date fecha = new Date();
+            Accesos ac = new Accesos(usuario, fecha, RegistrarIp());
+            Conexion.RegistrarAccesos(ac);
             switch (tipoUsuario) {
                 case "user" -> {
                     JOptionPane.showMessageDialog(this, "Usuario logado. Bienvenido "+usuario);
@@ -226,6 +233,16 @@ public class Login extends javax.swing.JFrame {
             txtUsuario.setText("");
             pfContrasenya.setText("");
         }
+    }
+    public String RegistrarIp() {
+        String ip = null;
+        try {
+            InetAddress localhost = InetAddress.getLocalHost();
+            ip = localhost.getHostAddress();
+        } catch (UnknownHostException ex) {
+            System.getLogger(Login.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+        return ip;
     }
 
 }// End View
