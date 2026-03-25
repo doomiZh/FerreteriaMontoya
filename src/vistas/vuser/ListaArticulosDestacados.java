@@ -6,6 +6,7 @@ package vistas.vuser;
 
 import bbdd.Conexion;
 import javax.swing.table.DefaultTableModel;
+import modelos.Productos;
 
 /**
  * 
@@ -23,6 +24,8 @@ public class ListaArticulosDestacados extends javax.swing.JDialog {
         initComponents();
         DefaultTableModel modeloDatos = (DefaultTableModel) tbArticulos.getModel();
         Conexion.ObtenerListadoArtDestacado(modeloDatos);
+        Conexion.CargarCategoria(cboCategoria);
+        Conexion.CargarOrigen(cboOrigen);
     }
 
     /**
@@ -62,8 +65,8 @@ public class ListaArticulosDestacados extends javax.swing.JDialog {
         cboDestacado = new javax.swing.JComboBox<>();
         jLabel12 = new javax.swing.JLabel();
         cboOferta = new javax.swing.JComboBox<>();
-        btnActualizar = new javax.swing.JButton();
-        btnEliminar = new javax.swing.JButton();
+        jLabel14 = new javax.swing.JLabel();
+        cboOrigen = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("LISTADO DE ARTICULOS DESTACADOS");
@@ -71,7 +74,7 @@ public class ListaArticulosDestacados extends javax.swing.JDialog {
 
         jPanel1.setBackground(new java.awt.Color(255, 0, 0));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("LISTADO DE ARTICULOS DESTACADOS");
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/logo_ferreteria_150_82.png"))); // NOI18N
@@ -99,6 +102,11 @@ public class ListaArticulosDestacados extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
+        tbArticulos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbArticulosMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tbArticulos);
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
@@ -123,7 +131,7 @@ public class ListaArticulosDestacados extends javax.swing.JDialog {
         cboCategoria.setEnabled(false);
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel8.setText("Descripcion:");
+        jLabel8.setText("DESCRIPCION:");
 
         txtAreaDescripcion.setColumns(20);
         txtAreaDescripcion.setLineWrap(true);
@@ -159,11 +167,11 @@ public class ListaArticulosDestacados extends javax.swing.JDialog {
         cboOferta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "SI", "NO" }));
         cboOferta.setEnabled(false);
 
-        btnActualizar.setText("Actualizar");
-        btnActualizar.setEnabled(false);
+        jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel14.setText("ORIGEN:");
 
-        btnEliminar.setText("Eliminar");
-        btnEliminar.setEnabled(false);
+        cboOrigen.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "SI", "NO" }));
+        cboOrigen.setEnabled(false);
 
         javax.swing.GroupLayout panelDatosLayout = new javax.swing.GroupLayout(panelDatos);
         panelDatos.setLayout(panelDatosLayout);
@@ -200,26 +208,22 @@ public class ListaArticulosDestacados extends javax.swing.JDialog {
                                 .addGap(18, 18, 18)
                                 .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtPrecioVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtPrecioCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(panelDatosLayout.createSequentialGroup()
-                                .addGap(19, 19, 19)
-                                .addComponent(btnActualizar)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnEliminar)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDatosLayout.createSequentialGroup()
+                                    .addComponent(txtPrecioCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(panelDatosLayout.createSequentialGroup()
                         .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8))
-                        .addGap(11, 11, 11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel11)
-                            .addComponent(jLabel12))
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel14))
                         .addGap(18, 18, 18)
                         .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cboOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cboDestacado, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cboOferta, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(166, 166, 166))))
+                            .addComponent(cboOferta, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         panelDatosLayout.setVerticalGroup(
             panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -245,20 +249,21 @@ public class ListaArticulosDestacados extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jLabel11)
-                    .addComponent(cboDestacado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jLabel14)
+                    .addComponent(cboOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panelDatosLayout.createSequentialGroup()
-                        .addGap(9, 9, 9)
+                        .addGap(15, 15, 15)
+                        .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel11)
+                            .addComponent(cboDestacado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel12)
-                            .addComponent(cboOferta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnActualizar)
-                            .addComponent(btnEliminar))))
+                            .addComponent(cboOferta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(panelDatosLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -269,19 +274,20 @@ public class ListaArticulosDestacados extends javax.swing.JDialog {
             .addGroup(panelArticuloLayout.createSequentialGroup()
                 .addGroup(panelArticuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelArticuloLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane2))
+                    .addGroup(panelArticuloLayout.createSequentialGroup()
                         .addGroup(panelArticuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelArticuloLayout.createSequentialGroup()
                                 .addGap(130, 130, 130)
-                                .addGroup(panelArticuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(panelDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 543, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel6)))
+                                .addComponent(jLabel6))
                             .addGroup(panelArticuloLayout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(jLabel5)))
-                        .addGap(0, 96, Short.MAX_VALUE))
-                    .addGroup(panelArticuloLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane2)))
+                                .addComponent(jLabel5))
+                            .addGroup(panelArticuloLayout.createSequentialGroup()
+                                .addGap(130, 130, 130)
+                                .addComponent(panelDatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 91, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         panelArticuloLayout.setVerticalGroup(
@@ -295,7 +301,7 @@ public class ListaArticulosDestacados extends javax.swing.JDialog {
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelDatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -308,7 +314,7 @@ public class ListaArticulosDestacados extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addContainerGap())
-            .addComponent(panelArticulo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 775, Short.MAX_VALUE)
+            .addComponent(panelArticulo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -318,8 +324,8 @@ public class ListaArticulosDestacados extends javax.swing.JDialog {
                     .addComponent(jLabel2)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelArticulo, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addComponent(panelArticulo, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -336,6 +342,10 @@ public class ListaArticulosDestacados extends javax.swing.JDialog {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void tbArticulosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbArticulosMouseClicked
+        MostrarInformacion();
+    }//GEN-LAST:event_tbArticulosMouseClicked
 
     /**
      * @param args the command line arguments
@@ -375,16 +385,16 @@ public class ListaArticulosDestacados extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnActualizar;
-    private javax.swing.JButton btnEliminar;
     private javax.swing.JComboBox<String> cboCategoria;
     private javax.swing.JComboBox<String> cboDestacado;
     private javax.swing.JComboBox<String> cboOferta;
+    private javax.swing.JComboBox<String> cboOrigen;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -406,4 +416,28 @@ public class ListaArticulosDestacados extends javax.swing.JDialog {
     private javax.swing.JTextField txtPrecioVenta;
     private javax.swing.JTextField txtStock;
     // End of variables declaration//GEN-END:variables
-}
+
+    /**
+     * Método para mostrar información en el formulario en caso el usuario haya
+     * pulsado en una fila asi obteniendo el codigo y llamando a la conexion donde imprime
+     * los datos completos del artículo
+     */
+    public void MostrarInformacion(){
+        int fila = tbArticulos.getSelectedRow();
+        String codigo = tbArticulos.getValueAt(fila, 0).toString();
+
+        Productos pd = Conexion.MostrarFormulario(codigo);
+        
+        txtCodProducto.setText(codigo);
+        txtNombre.setText(pd.getNombre());
+        cboCategoria.setSelectedItem(pd.getCategoria());
+        txtAreaDescripcion.setText(pd.getDescripcion());
+        txtPrecioCompra.setText(String.valueOf(pd.getPrecioCompra()));
+        txtPrecioVenta.setText(String.valueOf(pd.getPrecioVenta()));
+        txtStock.setText(String.valueOf(pd.getStock()));
+        cboOrigen.setSelectedItem(pd.getOrigen());
+        cboDestacado.setSelectedItem(pd.getDestacado());
+        cboOferta.setSelectedItem(pd.getOferta());
+    }
+    
+}// End view
