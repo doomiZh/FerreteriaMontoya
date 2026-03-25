@@ -11,7 +11,6 @@ import java.util.Date;
  * @author grupo
  */
 public class Accesos {
-    private int idAcceso;
     private String usuario;
     private Date fechaAcceso;
     private String ip;
@@ -19,21 +18,12 @@ public class Accesos {
     public Accesos() {
     }
 
-    public Accesos(int idAcceso, String usuario, Date fechaAcceso, String ip) {
-        this.idAcceso = idAcceso;
+    public Accesos(String usuario, Date fechaAcceso, String ip) {
         this.usuario = usuario;
         this.fechaAcceso = fechaAcceso;
         this.ip = ip;
     }
-
-    public int getIdAcceso() {
-        return idAcceso;
-    }
-
-    public void setIdAcceso(int idAcceso) {
-        this.idAcceso = idAcceso;
-    }
-
+    
     public String getUsuario() {
         return usuario;
     }
