@@ -5,6 +5,7 @@
 package bbdd;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,6 +13,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JComboBox;
 import javax.swing.table.DefaultTableModel;
+import modelos.Accesos;
 
 /**
  * Clase donde almacena la conexion con la base de datos
@@ -102,8 +104,23 @@ public class Conexion {
     }
     
     /* ACCESOS */
-    
-    
+    public static boolean RegistrarAccesos(Accesos cli) {
+        String consulta = "INSERT INTO accesos (usuario, ip, fecha) VALUES (?, ?, ?)";
+        Conectar();
+        try {
+            PreparedStatement st = conn.prepareStatement(consulta);
+            st.setString(1, cli.getUsuario());
+            st.setDate(2, new Date(cli.getFechaAcceso().getTime()));
+            st.setString(3, cli.getIp());
+            st.execute();
+            return true;
+        } catch (SQLException ex) {
+            System.getLogger(Conexion.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } finally {
+            Cerrar();
+        }
+        return false;
+    }
     
     
     /* PANTALLA PRINCIPAL */
