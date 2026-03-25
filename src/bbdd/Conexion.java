@@ -34,7 +34,7 @@ public class Conexion {
     public static void Conectar(){
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://localhost/proyectoferreteria",
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3307/proyectoferreteria",
                     "root","");
             System.out.println("Conexion abierta");
         } catch (ClassNotFoundException | SQLException ex) {
@@ -366,5 +366,29 @@ public class Conexion {
         }
         return u;
     }
+    
+    /**
+     * Método para actualizar la cuenta de un usuario siempre y cuando el usuario sea logado
+     * @param cli Clase de Usuarios almacenados de nombres completos y contraseña
+     * @return true si esta actualizado y false en caso contrario no se pudo actualizar los datos.
+     */
+    public static boolean ActualizarCuenta(Usuarios cli){
+        String consulta = "update usuarios set nombre_apellidos = ?, pass = ? where usuario = ?";
+        Conectar();
+        try {
+            PreparedStatement ps = conn.prepareStatement(consulta);
+            ps.setString(1, cli.getNombresCompletos());
+            ps.setString(2, cli.getPass());
+            ps.setString(3, cli.getUsuario());
+            ps.execute();
+            return true;
+        } catch (SQLException ex) {
+            System.getLogger(Conexion.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } finally {
+            Cerrar();
+        }
+        return false;
+    }
+    
     
 }// End Class
