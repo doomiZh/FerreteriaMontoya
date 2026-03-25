@@ -24,6 +24,8 @@ public class ListaArticulo extends javax.swing.JDialog {
         initComponents();
         DefaultTableModel modeloDatos = (DefaultTableModel) tbArticulos.getModel();
         Conexion.ObtenerListadoArticulo(modeloDatos);
+        Conexion.CargarCategoria(cboCategoria);
+        Conexion.CargarOrigen(cboOrigen);
     }
 
     /**
@@ -65,8 +67,6 @@ public class ListaArticulo extends javax.swing.JDialog {
         cboOferta = new javax.swing.JComboBox<>();
         jLabel14 = new javax.swing.JLabel();
         cboOrigen = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("LISTADO DE ARTICULOS");
@@ -173,10 +173,6 @@ public class ListaArticulo extends javax.swing.JDialog {
         cboOrigen.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "SI", "NO" }));
         cboOrigen.setEnabled(false);
 
-        jButton1.setText("Actualizar");
-
-        jButton2.setText("Eliminar");
-
         javax.swing.GroupLayout panelDatosLayout = new javax.swing.GroupLayout(panelDatos);
         panelDatos.setLayout(panelDatosLayout);
         panelDatosLayout.setHorizontalGroup(
@@ -218,21 +214,15 @@ public class ListaArticulo extends javax.swing.JDialog {
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(panelDatosLayout.createSequentialGroup()
-                                .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel11)
-                                    .addComponent(jLabel12)
-                                    .addComponent(jLabel14))
-                                .addGap(18, 18, 18)
-                                .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cboOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cboDestacado, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cboOferta, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(panelDatosLayout.createSequentialGroup()
-                                .addComponent(jButton1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton2)))))
+                        .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel14))
+                        .addGap(18, 18, 18)
+                        .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cboOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cboDestacado, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cboOferta, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(32, Short.MAX_VALUE))
         );
         panelDatosLayout.setVerticalGroup(
@@ -270,16 +260,11 @@ public class ListaArticulo extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel12)
-                            .addComponent(cboOferta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
-                            .addComponent(jButton2))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(cboOferta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(panelDatosLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
-                        .addContainerGap())))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout panelArticuloLayout = new javax.swing.GroupLayout(panelArticulo);
@@ -314,8 +299,8 @@ public class ListaArticulo extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelDatos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(panelDatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout panelFondoLayout = new javax.swing.GroupLayout(panelFondo);
@@ -357,7 +342,7 @@ public class ListaArticulo extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tbArticulosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbArticulosMouseClicked
-        // MostrarFormulario(codigo);
+        MostrarInformacion();
     }//GEN-LAST:event_tbArticulosMouseClicked
 
     /**
@@ -403,8 +388,6 @@ public class ListaArticulo extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> cboOferta;
     private javax.swing.JComboBox<String> cboOrigen;
     private javax.swing.JLabel imagen;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -435,12 +418,20 @@ public class ListaArticulo extends javax.swing.JDialog {
     public void MostrarInformacion(){
         int fila = tbArticulos.getSelectedRow();
         String codigo = tbArticulos.getValueAt(fila, 0).toString();
-        
-        Conexion.Conectar();
+
         Productos pd = Conexion.MostrarFormulario(codigo);
         
+        txtCodProducto.setText(codigo);
         txtNombre.setText(pd.getNombre());
-    }
+        cboCategoria.setSelectedItem(pd.getCategoria());
+        txtAreaDescripcion.setText(pd.getDescripcion());
+        txtPrecioCompra.setText(String.valueOf(pd.getPrecioCompra()));
+        txtPrecioVenta.setText(String.valueOf(pd.getPrecioVenta()));
+        txtStock.setText(String.valueOf(pd.getStock()));
+        cboOrigen.setSelectedItem(pd.getOrigen());
+        cboDestacado.setSelectedItem(pd.getDestacado());
+        cboOferta.setSelectedItem(pd.getOferta());
+    }   
 
 
 }
