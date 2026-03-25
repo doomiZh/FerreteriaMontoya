@@ -77,6 +77,7 @@ public class DatosCuentas extends javax.swing.JDialog {
         jLabel6.setText("Contraseña:");
 
         btnActualizar.setText("Actualizar");
+        btnActualizar.addActionListener(this::btnActualizarActionPerformed);
 
         txtNombre.setName("NOMBRE COMPLETO"); // NOI18N
 
@@ -182,6 +183,10 @@ public class DatosCuentas extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        Actualizar();
+    }//GEN-LAST:event_btnActualizarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -266,6 +271,26 @@ public class DatosCuentas extends javax.swing.JDialog {
         txtNombre.setText(u.getNombresCompletos());
         txtUsuario.setText(u.getUsuario());
         pfContrasenya.setText(u.getPass());
-    }
+    }// End Method MostrarDatosUsuario();
+    
+    /**
+     * Método para actualizar las cuentas donde actualizara el nombre y apellidos, y contraseña
+     * enviando el usuario como parámetro principal en el metodo ActualizarCuenta.
+     */
+    public void Actualizar(){
+        if(CompruebaCampos()){
+            Usuarios u = new Usuarios(
+            txtNombre.getText(),
+            txtUsuario.getText(),
+            new String(pfContrasenya.getPassword()).trim()
+            );
+            if(Conexion.ActualizarCuenta(u)){
+                JOptionPane.showMessageDialog(this, "Usuario actualizado correctamente");
+            } else {
+                JOptionPane.showMessageDialog(this, "Error al actualizar tu cuenta.\nIntentalo mas tarde.");
+            }
+            MostrarDatosUsuario();
+        }
+    }// End Method Actualizar();
 
 }// End View
