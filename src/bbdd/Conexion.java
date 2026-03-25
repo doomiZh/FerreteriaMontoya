@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.JComboBox;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -131,7 +132,7 @@ public class Conexion {
         }
     }
     
-    /* OPCIONES USUARIO */
+    /* OPCIONES */
     
     /**
      * Método para imprimr el listado de articulo en un JTable donde tendra
@@ -159,6 +160,119 @@ public class Conexion {
         }
     }
     
+    /**
+     * Método para imprimir los articulos que son destacados en un JTable donde
+     * tendra el codigo, nombre, categoria y precio de venta del producto o
+     * artículo sea si destacado es 'SI'
+     * @param modelo JTable donde se cargará los datos
+     */
+    public static void ObtenerListadoArtDestacado(DefaultTableModel modelo){
+        Object datos[] = new Object[4];
+        String consulta = "select codProducto, nombre, categoria, precio_venta from producto where destacado='SI'";
+        Conectar();
+        try {
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(consulta);
+            while (rs.next()){
+                datos[0] = rs.getString(1);
+                datos[1] = rs.getString(2);
+                datos[2] = rs.getString(3);
+                datos[3] = rs.getDouble(4);
+                modelo.addRow(datos);
+            }
+        } catch (SQLException ex) {
+            System.getLogger(Conexion.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } finally {
+            Cerrar();
+        }
+    }
+    
+    /**
+     * Método para imprimir los articulos que son destacados y estan en oferta
+     * en un JTable donde tendra el codigo, nombre, categoria y precio de venta
+     * del producto o artículo sea si el destacado y el oferta es 'SI'
+     * @param modelo JTable donde se cargará los datos
+     */
+    public static void ObtenerListadoArtOferta(DefaultTableModel modelo){
+        Object datos[] = new Object[4];
+        String consulta = "select codProducto, nombre, categoria, precio_venta from producto where destacado='SI' and oferta='SI'";
+        Conectar();
+        try {
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(consulta);
+            while (rs.next()){
+                datos[0] = rs.getString(1);
+                datos[1] = rs.getString(2);
+                datos[2] = rs.getString(3);
+                datos[3] = rs.getDouble(4);
+                modelo.addRow(datos);
+            }
+        } catch (SQLException ex) {
+            System.getLogger(Conexion.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } finally {
+            Cerrar();
+        }
+    }
+    
+    /**
+     * Método para cargar las categorias de un combo box almacenado en la tabla categorias de bbdd
+     * @param combo JComboBox donde mostrará los datos de categorias donde se requiera.
+     */
+    public static void CargarCategoria(JComboBox combo){
+        String consulta = "select categoria from categorias";
+        Conectar();
+        try {
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(consulta);
+            while (rs.next()) {
+                combo.addItem(rs.getString(1));
+            }
+        } catch (SQLException ex) {
+            System.getLogger(Conexion.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } finally {
+            Cerrar();
+        }
+    }
+    
+    /**
+     * Método para cargar los origenes de un combo box almacenado en la tabla origen de bbdd
+     * @param combo JComboBox donde mostrará los datos de origen donde se requiera.
+     */
+    public static void CargarOrigen(JComboBox combo){
+        String consulta = "select origen from origen";
+        Conectar();
+        try {
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(consulta);
+            while (rs.next()) {
+                combo.addItem(rs.getString(1));
+            }
+        } catch (SQLException ex) {
+            System.getLogger(Conexion.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } finally {
+            Cerrar();
+        }
+    }
+    
+    /**
+     * Método para cargar las tiendas de un combo box almacenado en la tabla origen de bbdd
+     * @param combo JComboBox donde mostrará los datos de origen donde se requiera.
+     */
+    public static void CargarTienda(JComboBox combo){
+        String consulta = "select denominacion from tiendas";
+        Conectar();
+        try {
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(consulta);
+            while (rs.next()) {
+                combo.addItem(rs.getString(1));
+            }
+        } catch (SQLException ex) {
+            System.getLogger(Conexion.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } finally {
+            Cerrar();
+        }
+    }
     
     
     
