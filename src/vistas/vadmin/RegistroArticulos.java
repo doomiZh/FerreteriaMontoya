@@ -62,6 +62,7 @@ public class RegistroArticulos extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("REGISTRO ARTICULOS");
+        setResizable(false);
 
         panelFondo.setBackground(new java.awt.Color(255, 0, 0));
 
