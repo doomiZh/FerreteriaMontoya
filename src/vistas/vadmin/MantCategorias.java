@@ -81,6 +81,7 @@ public class MantCategorias extends javax.swing.JDialog {
         jLabel6.setText("Datos de categorías");
 
         panelDatos.setBackground(new java.awt.Color(255, 255, 0));
+        panelDatos.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setText("CATEGORIA:");
