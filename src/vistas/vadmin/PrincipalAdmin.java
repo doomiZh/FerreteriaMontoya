@@ -39,15 +39,15 @@ public class PrincipalAdmin extends javax.swing.JFrame {
         panelPrincipal = new javax.swing.JPanel();
         panelBotones = new javax.swing.JPanel();
         btnOpcionUno = new javax.swing.JButton();
-        btnOpcionCuatro = new javax.swing.JButton();
-        btnOpcionOcho = new javax.swing.JButton();
         btnOpcionDos = new javax.swing.JButton();
-        btnOpcionCinco = new javax.swing.JButton();
-        btnOpcionNueve = new javax.swing.JButton();
         btnOpcionTres = new javax.swing.JButton();
+        btnOpcionCuatro = new javax.swing.JButton();
+        btnOpcionCinco = new javax.swing.JButton();
         btnOpcionSeis = new javax.swing.JButton();
-        btnOpcionDiez = new javax.swing.JButton();
         btnOpcionSiete = new javax.swing.JButton();
+        btnOpcionOcho = new javax.swing.JButton();
+        btnOpcionNueve = new javax.swing.JButton();
+        btnOpcionDiez = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -70,70 +70,34 @@ public class PrincipalAdmin extends javax.swing.JFrame {
         panelBotones.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         btnOpcionUno.setText("Ver listado total de articulos");
-
-        btnOpcionCuatro.setText("Mantenimiento de Usuarios");
-
-        btnOpcionOcho.setText("Registro de Artículos");
+        panelBotones.add(btnOpcionUno);
 
         btnOpcionDos.setText("Ver listado de artículos en oferta");
-
-        btnOpcionCinco.setText("Mantenimiento de Categorias");
-
-        btnOpcionNueve.setText("Registro de Usuarios");
+        panelBotones.add(btnOpcionDos);
 
         btnOpcionTres.setText("Ver listado de artículos deseados");
+        panelBotones.add(btnOpcionTres);
+
+        btnOpcionCuatro.setText("Mantenimiento de Usuarios");
+        panelBotones.add(btnOpcionCuatro);
+
+        btnOpcionCinco.setText("Mantenimiento de Categorias");
+        panelBotones.add(btnOpcionCinco);
 
         btnOpcionSeis.setText("Mantenimiento de Origenes");
-
-        btnOpcionDiez.setText("Ver datos de su Cuenta");
+        panelBotones.add(btnOpcionSeis);
 
         btnOpcionSiete.setText("Mantenimiento de Tiendas");
+        panelBotones.add(btnOpcionSiete);
 
-        javax.swing.GroupLayout panelBotonesLayout = new javax.swing.GroupLayout(panelBotones);
-        panelBotones.setLayout(panelBotonesLayout);
-        panelBotonesLayout.setHorizontalGroup(
-            panelBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelBotonesLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnOpcionTres, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnOpcionDos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnOpcionUno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(84, 84, 84)
-                .addGroup(panelBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnOpcionSiete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnOpcionSeis, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnOpcionCinco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnOpcionCuatro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(panelBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnOpcionOcho, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnOpcionNueve, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnOpcionDiez, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap())
-        );
-        panelBotonesLayout.setVerticalGroup(
-            panelBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelBotonesLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnOpcionUno)
-                    .addComponent(btnOpcionCuatro)
-                    .addComponent(btnOpcionOcho))
-                .addGap(32, 32, 32)
-                .addGroup(panelBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnOpcionDos)
-                    .addComponent(btnOpcionCinco)
-                    .addComponent(btnOpcionNueve))
-                .addGap(38, 38, 38)
-                .addGroup(panelBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnOpcionSeis)
-                    .addComponent(btnOpcionTres)
-                    .addComponent(btnOpcionDiez))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                .addComponent(btnOpcionSiete)
-                .addContainerGap())
-        );
+        btnOpcionOcho.setText("Registro de Artículos");
+        panelBotones.add(btnOpcionOcho);
+
+        btnOpcionNueve.setText("Registro de Usuarios");
+        panelBotones.add(btnOpcionNueve);
+
+        btnOpcionDiez.setText("Ver datos de su Cuenta");
+        panelBotones.add(btnOpcionDiez);
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
@@ -166,22 +130,21 @@ public class PrincipalAdmin extends javax.swing.JFrame {
         panelPrincipalLayout.setHorizontalGroup(
             panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelPrincipalLayout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addComponent(jLabel5)
-                .addContainerGap(516, Short.MAX_VALUE))
-            .addGroup(panelPrincipalLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelPrincipalLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jLabel6)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelPrincipalLayout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addComponent(jLabel5))
+                            .addGroup(panelPrincipalLayout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addComponent(jLabel6)))
+                        .addGap(0, 510, Short.MAX_VALUE))
                     .addGroup(panelPrincipalLayout.createSequentialGroup()
-                        .addComponent(jScrollPane2)
-                        .addContainerGap())))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPrincipalLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(panelBotones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap()
+                        .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(panelBotones, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         panelPrincipalLayout.setVerticalGroup(
@@ -189,13 +152,13 @@ public class PrincipalAdmin extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPrincipalLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(panelBotones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(panelBotones, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout panelFondoLayout = new javax.swing.GroupLayout(panelFondo);
@@ -219,7 +182,7 @@ public class PrincipalAdmin extends javax.swing.JFrame {
                     .addComponent(lblBienvenida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(110, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
