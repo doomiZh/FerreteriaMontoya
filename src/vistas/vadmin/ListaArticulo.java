@@ -65,8 +65,8 @@ public class ListaArticulo extends javax.swing.JDialog {
         cboOferta = new javax.swing.JComboBox<>();
         jLabel14 = new javax.swing.JLabel();
         cboOrigen = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnActualizar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("LISTA TOTAL DE ARTICULOS");
@@ -76,6 +76,7 @@ public class ListaArticulo extends javax.swing.JDialog {
         imagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/logo_ferreteria_150_82.png"))); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("LISTADO TOTAL DE ARTÍCULOS");
 
         panelArticulo.setBackground(new java.awt.Color(0, 0, 0));
@@ -125,7 +126,7 @@ public class ListaArticulo extends javax.swing.JDialog {
         cboCategoria.setEnabled(false);
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel8.setText("Descripcion:");
+        jLabel8.setText("DESCRIPCION:");
 
         txtAreaDescripcion.setColumns(20);
         txtAreaDescripcion.setLineWrap(true);
@@ -164,12 +165,13 @@ public class ListaArticulo extends javax.swing.JDialog {
         jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel14.setText("ORIGEN:");
 
-        cboOrigen.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "SI", "NO" }));
         cboOrigen.setEnabled(false);
 
-        jButton1.setText("Actualizar");
+        btnActualizar.setText("Actualizar");
+        btnActualizar.setEnabled(false);
 
-        jButton2.setText("Eliminar");
+        btnEliminar.setText("Eliminar");
+        btnEliminar.setEnabled(false);
 
         javax.swing.GroupLayout panelDatosLayout = new javax.swing.GroupLayout(panelDatos);
         panelDatos.setLayout(panelDatosLayout);
@@ -224,9 +226,9 @@ public class ListaArticulo extends javax.swing.JDialog {
                                     .addComponent(cboDestacado, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(cboOferta, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(panelDatosLayout.createSequentialGroup()
-                                .addComponent(jButton1)
+                                .addComponent(btnActualizar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton2)))))
+                                .addComponent(btnEliminar)))))
                 .addContainerGap(32, Short.MAX_VALUE))
         );
         panelDatosLayout.setVerticalGroup(
@@ -267,8 +269,8 @@ public class ListaArticulo extends javax.swing.JDialog {
                             .addComponent(cboOferta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
-                            .addComponent(jButton2))
+                            .addComponent(btnActualizar)
+                            .addComponent(btnEliminar))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(panelDatosLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -385,13 +387,13 @@ public class ListaArticulo extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnActualizar;
+    private javax.swing.JButton btnEliminar;
     private javax.swing.JComboBox<String> cboCategoria;
     private javax.swing.JComboBox<String> cboDestacado;
     private javax.swing.JComboBox<String> cboOferta;
     private javax.swing.JComboBox<String> cboOrigen;
     private javax.swing.JLabel imagen;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
