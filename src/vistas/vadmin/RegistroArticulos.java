@@ -8,6 +8,7 @@ import bbdd.Conexion;
 import java.awt.Color;
 import java.awt.Component;
 import java.util.Date;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import modelos.Productos;
@@ -57,7 +58,6 @@ public class RegistroArticulos extends javax.swing.JDialog {
         btnRegistrar = new javax.swing.JButton();
         txtCodProducto = new javax.swing.JTextField();
         txtNombre = new javax.swing.JTextField();
-        txtAreaDescripcion = new javax.swing.JTextField();
         txtPrecioCompra = new javax.swing.JTextField();
         txtStock = new javax.swing.JTextField();
         cboDestacado = new javax.swing.JComboBox<>();
@@ -67,6 +67,8 @@ public class RegistroArticulos extends javax.swing.JDialog {
         txtPrecioVenta = new javax.swing.JTextField();
         jLabel28 = new javax.swing.JLabel();
         cboOferta = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtAreaDescripcion = new javax.swing.JTextArea();
         jLabel26 = new javax.swing.JLabel();
         panelUAR = new javax.swing.JPanel();
         lblUltimoArticuloRegistrado = new javax.swing.JLabel();
@@ -117,15 +119,71 @@ public class RegistroArticulos extends javax.swing.JDialog {
         btnRegistrar.setText("REGISTRAR");
         btnRegistrar.addActionListener(this::btnRegistrarActionPerformed);
 
+        txtCodProducto.setName("CODIGO"); // NOI18N
+        txtCodProducto.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtCodProductoFocusGained(evt);
+            }
+        });
+
+        txtNombre.setName("NOMBRE"); // NOI18N
+        txtNombre.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtNombreFocusGained(evt);
+            }
+        });
+
+        txtPrecioCompra.setName("PRECIO COMPRA"); // NOI18N
+        txtPrecioCompra.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtPrecioCompraFocusGained(evt);
+            }
+        });
+
+        txtStock.setName("STOCK"); // NOI18N
+        txtStock.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtStockFocusGained(evt);
+            }
+        });
+
         cboDestacado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "SI", "NO" }));
+        cboDestacado.setName("DESTACADO"); // NOI18N
+
+        cboOrigen.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione" }));
+        cboOrigen.setName("ORIGEN"); // NOI18N
+
+        cboCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione" }));
+        cboCategoria.setName("CATEGORIA"); // NOI18N
 
         jLabel27.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel27.setText("PRECIO VENTA:");
+
+        txtPrecioVenta.setName("PRECIO VENTA"); // NOI18N
+        txtPrecioVenta.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtPrecioVentaFocusGained(evt);
+            }
+        });
 
         jLabel28.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel28.setText("OFERTA:");
 
         cboOferta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "SI", "NO" }));
+        cboOferta.setName("OFERTA"); // NOI18N
+
+        txtAreaDescripcion.setColumns(20);
+        txtAreaDescripcion.setFont(new java.awt.Font("Segoe UI", 0, 9)); // NOI18N
+        txtAreaDescripcion.setLineWrap(true);
+        txtAreaDescripcion.setRows(5);
+        txtAreaDescripcion.setWrapStyleWord(true);
+        txtAreaDescripcion.setName("DESCRIPCION"); // NOI18N
+        txtAreaDescripcion.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtAreaDescripcionFocusGained(evt);
+            }
+        });
+        jScrollPane1.setViewportView(txtAreaDescripcion);
 
         javax.swing.GroupLayout panelDatosLayout = new javax.swing.GroupLayout(panelDatos);
         panelDatos.setLayout(panelDatosLayout);
@@ -138,10 +196,6 @@ public class RegistroArticulos extends javax.swing.JDialog {
                         .addComponent(jLabel16)
                         .addGap(18, 18, 18)
                         .addComponent(txtCodProducto))
-                    .addGroup(panelDatosLayout.createSequentialGroup()
-                        .addComponent(jLabel19)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtAreaDescripcion))
                     .addGroup(panelDatosLayout.createSequentialGroup()
                         .addComponent(jLabel17)
                         .addGap(18, 18, 18)
@@ -179,7 +233,11 @@ public class RegistroArticulos extends javax.swing.JDialog {
                                         .addComponent(cboOferta, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(18, 18, 18)
                                 .addComponent(btnRegistrar)))
-                        .addGap(0, 1, Short.MAX_VALUE)))
+                        .addGap(0, 1, Short.MAX_VALUE))
+                    .addGroup(panelDatosLayout.createSequentialGroup()
+                        .addComponent(jLabel19)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1)))
                 .addContainerGap())
         );
         panelDatosLayout.setVerticalGroup(
@@ -200,8 +258,8 @@ public class RegistroArticulos extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel19)
-                    .addComponent(txtAreaDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(9, 9, 9)
                 .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel20)
                     .addComponent(jLabel27))
@@ -279,7 +337,7 @@ public class RegistroArticulos extends javax.swing.JDialog {
                 .addGroup(panelArticulosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel26)
                     .addComponent(panelDatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(180, 180, 180))
+                .addContainerGap(180, Short.MAX_VALUE))
         );
         panelArticulosLayout.setVerticalGroup(
             panelArticulosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -290,9 +348,9 @@ public class RegistroArticulos extends javax.swing.JDialog {
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelArticulosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelUAR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(panelDatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(panelDatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelUAR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout panelFondoLayout = new javax.swing.GroupLayout(panelFondo);
@@ -316,7 +374,7 @@ public class RegistroArticulos extends javax.swing.JDialog {
                     .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelArticulos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -337,6 +395,30 @@ public class RegistroArticulos extends javax.swing.JDialog {
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         Registrar();
     }//GEN-LAST:event_btnRegistrarActionPerformed
+
+    private void txtCodProductoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCodProductoFocusGained
+        txtCodProducto.setBackground(Color.white);
+    }//GEN-LAST:event_txtCodProductoFocusGained
+
+    private void txtNombreFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombreFocusGained
+        txtNombre.setBackground(Color.white);
+    }//GEN-LAST:event_txtNombreFocusGained
+
+    private void txtAreaDescripcionFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAreaDescripcionFocusGained
+        txtAreaDescripcion.setBackground(Color.white);
+    }//GEN-LAST:event_txtAreaDescripcionFocusGained
+
+    private void txtPrecioCompraFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPrecioCompraFocusGained
+        txtPrecioCompra.setBackground(Color.white);
+    }//GEN-LAST:event_txtPrecioCompraFocusGained
+
+    private void txtPrecioVentaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPrecioVentaFocusGained
+        txtPrecioVenta.setBackground(Color.white);
+    }//GEN-LAST:event_txtPrecioVentaFocusGained
+
+    private void txtStockFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtStockFocusGained
+        txtStock.setBackground(Color.white);
+    }//GEN-LAST:event_txtStockFocusGained
 
     /**
      * @param args the command line arguments
@@ -395,12 +477,13 @@ public class RegistroArticulos extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblUltimoArticuloRegistrado;
     private javax.swing.JPanel panelArticulos;
     private javax.swing.JPanel panelDatos;
     private javax.swing.JPanel panelFondo;
     private javax.swing.JPanel panelUAR;
-    private javax.swing.JTextField txtAreaDescripcion;
+    private javax.swing.JTextArea txtAreaDescripcion;
     private javax.swing.JTextField txtCodProducto;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtPrecioCompra;
@@ -408,23 +491,78 @@ public class RegistroArticulos extends javax.swing.JDialog {
     private javax.swing.JTextField txtStock;
     // End of variables declaration//GEN-END:variables
 
-    public void Registrar() {
-        Productos p = new Productos(txtCodProducto.getText(), 
-                txtNombre.getText(), cboCategoria.getSelectedItem().toString(), txtAreaDescripcion.getText(), 
-                Double.parseDouble(txtPrecioCompra.getText()), Double.parseDouble(txtPrecioVenta.getText()), 
-                Integer.parseInt(txtStock.getText()), cboOrigen.getSelectedItem().toString(), 
-                cboDestacado.getSelectedItem().toString(), cboOferta.getSelectedItem().toString(), new Date());
-        if(Conexion.CompruebaProducto(txtCodProducto.getText())){
-            JOptionPane.showMessageDialog(this, "El producto ya esta registrado.\nIngrese otro producto");
-            txtCodProducto.setText("");
-            txtCodProducto.setBackground(Color.red);
-        } else {
-            if (Conexion.RegistrarArticulo(p)){
-                JOptionPane.showMessageDialog(this, "El producato se ha registrado correctamente");
-            } else {
-                JOptionPane.showMessageDialog(this, "Error en el registro del producto");
+    /**
+     * Método para restaurar el formulario del panel Datos donde estan los campos
+     * textos y combo boxes
+     */
+    public void RestaurarFormulario(){
+        for (Component c : panelDatos.getComponents()){
+            if (c instanceof JTextField texto){
+                texto.setText("");
+            }
+            if (c instanceof JComboBox combo){
+                combo.setSelectedIndex(0);
             }
         }
+        txtAreaDescripcion.setText("");
     }
+    
+    /**
+     * Método para registrar el artículo primero validando los campos de manera escalonada,
+     * luego inicializando el producto uniendo los campos dentro de la inicializacion del objeto,
+     * luego realizando la condicional indicando si existe el producto mandando alerta y limpia el campo, si no
+     * registra el producto adicionalmente limpiando el formulario y cargando nuevamente el ultimo producto registrado
+     * en nuestro panel.
+     */
+    public void Registrar() {
+        if (Utilidades.ComprobarCampos(
+                txtCodProducto, 
+                txtNombre, 
+                cboCategoria, 
+                txtAreaDescripcion, 
+                txtPrecioCompra, 
+                txtPrecioVenta, 
+                txtStock, 
+                cboOrigen, 
+                cboDestacado, 
+                cboOferta)) {
+            if (!Utilidades.ComprobarNumeroDecimal(txtPrecioCompra)) {
+                Utilidades.AlertaNumeroDecimal(txtPrecioCompra);
+                return;
+            }
+            if (!Utilidades.ComprobarNumeroDecimal(txtPrecioVenta)) {
+                Utilidades.AlertaNumeroDecimal(txtPrecioVenta);
+                return;
+            }
+            if (!Utilidades.ComprobarNumeroEntero(txtStock)) {
+                Utilidades.AlertaNumeroEntero(txtStock);
+                return;
+            }
+            Productos p = new Productos(
+                    txtCodProducto.getText(),
+                    txtNombre.getText(),
+                    cboCategoria.getSelectedItem().toString(),
+                    txtAreaDescripcion.getText(),
+                    Double.parseDouble(txtPrecioVenta.getText()),
+                    Double.parseDouble(txtPrecioCompra.getText()),
+                    Integer.parseInt(txtStock.getText()),
+                    cboOrigen.getSelectedItem().toString(),
+                    cboDestacado.getSelectedItem().toString(),
+                    cboOferta.getSelectedItem().toString(), new Date());
+            if (Conexion.CompruebaProducto(txtCodProducto.getText())) {
+                JOptionPane.showMessageDialog(this, "El producto ya esta registrado.\nIngrese otro producto");
+                txtCodProducto.setText("");
+                txtCodProducto.setBackground(Color.red);
+            } else {
+                if (Conexion.RegistrarArticulo(p)) {
+                    JOptionPane.showMessageDialog(this, "El producato se ha registrado correctamente");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Error en el registro del producto");
+                }
+                RestaurarFormulario();
+                Conexion.ObtenerUltimoArticuloRegistrado(lblUltimoArticuloRegistrado);
+            }
+        }
+    }// End Method Registrar();
 
-}
+}// End View
