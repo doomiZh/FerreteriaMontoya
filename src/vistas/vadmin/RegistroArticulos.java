@@ -4,6 +4,8 @@
  */
 package vistas.vadmin;
 
+import bbdd.Conexion;
+
 /**
  *
  * @author Marco Antonio
@@ -18,6 +20,9 @@ public class RegistroArticulos extends javax.swing.JDialog {
     public RegistroArticulos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        Conexion.ObtenerUltimoArticuloRegistrado(lblUltimoArticuloRegistrado);
+        Conexion.CargarCategoria(cboCategoria);
+        Conexion.CargarOrigen(cboOrigen);
     }
 
     /**

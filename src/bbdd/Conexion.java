@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.table.DefaultTableModel;
 import modelos.Accesos;
 import modelos.Productos;
@@ -34,7 +35,7 @@ public class Conexion {
     public static void Conectar(){
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3307/proyectoferreteria",
+            conn = DriverManager.getConnection("jdbc:mysql://localhost/proyectoferreteria",
                     "root","");
             System.out.println("Conexion abierta");
         } catch (ClassNotFoundException | SQLException ex) {
@@ -389,6 +390,22 @@ public class Conexion {
         }
         return false;
     }
-    
+    public static void ObtenerUltimoArticuloRegistrado (JLabel lb) {
+        String consulta = "SELECT codProducto FROM producto order by codProducto desc limit 1";
+        Conectar();
+        try {
+            Statement st;
+            ResultSet rs;
+            st = conn.createStatement();
+            rs = st.executeQuery(consulta);
+            while (rs.next()){
+                lb.setText(rs.getString(1));
+            }
+        } catch (SQLException ex) {
+            System.getLogger(Conexion.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } finally {
+            Cerrar();
+        }
+    }
     
 }// End Class
