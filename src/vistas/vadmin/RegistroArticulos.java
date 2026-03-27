@@ -5,13 +5,20 @@
 package vistas.vadmin;
 
 import bbdd.Conexion;
+import java.awt.Color;
+import java.awt.Component;
+import java.util.Date;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import modelos.Productos;
+import modelos.Utilidades;
 
 /**
  *
  * @author Marco Antonio
  */
 public class RegistroArticulos extends javax.swing.JDialog {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(RegistroArticulos.class.getName());
 
     /**
@@ -108,6 +115,7 @@ public class RegistroArticulos extends javax.swing.JDialog {
 
         btnRegistrar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnRegistrar.setText("REGISTRAR");
+        btnRegistrar.addActionListener(this::btnRegistrarActionPerformed);
 
         cboDestacado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "SI", "NO" }));
 
@@ -326,6 +334,10 @@ public class RegistroArticulos extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+        Registrar();
+    }//GEN-LAST:event_btnRegistrarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -395,4 +407,24 @@ public class RegistroArticulos extends javax.swing.JDialog {
     private javax.swing.JTextField txtPrecioVenta;
     private javax.swing.JTextField txtStock;
     // End of variables declaration//GEN-END:variables
+
+    public void Registrar() {
+        Productos p = new Productos(txtCodProducto.getText(), 
+                txtNombre.getText(), cboCategoria.getSelectedItem().toString(), txtAreaDescripcion.getText(), 
+                Double.parseDouble(txtPrecioCompra.getText()), Double.parseDouble(txtPrecioVenta.getText()), 
+                Integer.parseInt(txtStock.getText()), cboOrigen.getSelectedItem().toString(), 
+                cboDestacado.getSelectedItem().toString(), cboOferta.getSelectedItem().toString(), new Date());
+        if(Conexion.CompruebaProducto(txtCodProducto.getText())){
+            JOptionPane.showMessageDialog(this, "El producto ya esta registrado.\nIngrese otro producto");
+            txtCodProducto.setText("");
+            txtCodProducto.setBackground(Color.red);
+        } else {
+            if (Conexion.RegistrarArticulo(p)){
+                JOptionPane.showMessageDialog(this, "El producato se ha registrado correctamente");
+            } else {
+                JOptionPane.showMessageDialog(this, "Error en el registro del producto");
+            }
+        }
+    }
+
 }

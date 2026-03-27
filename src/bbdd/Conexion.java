@@ -408,4 +408,51 @@ public class Conexion {
         }
     }
     
+    public static boolean CompruebaProducto(String producto) {
+        String consulta = "SELECT codProducto FROM producto WHERE codProducto =?";
+        Conectar();
+        try {
+            PreparedStatement ps;
+            ResultSet rs;
+            ps = conn.prepareStatement(consulta);
+            ps.setString(1, producto);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                return true;
+            }
+        } catch (SQLException ex) {
+            System.getLogger(Conexion.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } finally {
+            Cerrar();
+        }
+        return false;
+    }
+    
+    public static  boolean RegistrarArticulo(Productos cli){
+        String consulta = "INSERT INTO producto (codProducto, nombre, categoria, descripcion, precio_compra, precio_venta, stock, origen, destacado, oferta, fecha_alta) "
+                    + "VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+        Conectar();
+        try {
+            PreparedStatement ps = conn.prepareStatement(consulta);
+            ps.setString(1, cli.getCodigo());
+            ps.setString(2, cli.getNombre());
+            ps.setString(3, cli.getCategoria());
+            ps.setString(4, cli.getDescripcion());
+            ps.setDouble(5, cli.getPrecioCompra());
+            ps.setDouble(6, cli.getPrecioVenta());
+            ps.setInt(7, cli.getStock());
+            ps.setString(8, cli.getOrigen());
+            ps.setString(9, cli.getDestacado());
+            ps.setString(10, cli.getOferta());
+            ps.setDate(11, new Date(cli.getFechaAlta().getTime()));
+            ps.execute();
+            return true;
+        } catch (SQLException ex) {
+            System.getLogger(Conexion.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } finally {
+            Cerrar();
+        }
+        return false;
+    }
+    
 }// End Class

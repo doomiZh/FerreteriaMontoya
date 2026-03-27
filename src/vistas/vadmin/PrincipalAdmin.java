@@ -91,6 +91,7 @@ public class PrincipalAdmin extends javax.swing.JFrame {
         panelBotones.add(btnOpcionSiete);
 
         btnOpcionOcho.setText("Registro de Artículos");
+        btnOpcionOcho.addActionListener(this::btnOpcionOchoActionPerformed);
         panelBotones.add(btnOpcionOcho);
 
         btnOpcionNueve.setText("Registro de Usuarios");
@@ -132,13 +133,10 @@ public class PrincipalAdmin extends javax.swing.JFrame {
             .addGroup(panelPrincipalLayout.createSequentialGroup()
                 .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelPrincipalLayout.createSequentialGroup()
+                        .addGap(12, 12, 12)
                         .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelPrincipalLayout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addComponent(jLabel5))
-                            .addGroup(panelPrincipalLayout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addComponent(jLabel6)))
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6))
                         .addGap(0, 510, Short.MAX_VALUE))
                     .addGroup(panelPrincipalLayout.createSequentialGroup()
                         .addContainerGap()
@@ -199,6 +197,11 @@ public class PrincipalAdmin extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnOpcionOchoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpcionOchoActionPerformed
+        RegistroArticulos ra = new RegistroArticulos(this, true);
+        ra.setVisible(true);
+    }//GEN-LAST:event_btnOpcionOchoActionPerformed
 
     /**
      * @param args the command line arguments
