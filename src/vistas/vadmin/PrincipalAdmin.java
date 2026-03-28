@@ -54,7 +54,7 @@ public class PrincipalAdmin extends javax.swing.JFrame {
         tbUltimosArticulos = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Menú de administrador");
+        setTitle("FERRETERIA MONTOYA - Menú de administrador");
         setResizable(false);
 
         panelFondo.setBackground(new java.awt.Color(255, 0, 0));
@@ -70,24 +70,31 @@ public class PrincipalAdmin extends javax.swing.JFrame {
         panelBotones.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         btnOpcionUno.setText("Ver listado total de articulos");
+        btnOpcionUno.addActionListener(this::btnOpcionUnoActionPerformed);
         panelBotones.add(btnOpcionUno);
 
         btnOpcionDos.setText("Ver listado de artículos en oferta");
+        btnOpcionDos.addActionListener(this::btnOpcionDosActionPerformed);
         panelBotones.add(btnOpcionDos);
 
         btnOpcionTres.setText("Ver listado de artículos deseados");
+        btnOpcionTres.addActionListener(this::btnOpcionTresActionPerformed);
         panelBotones.add(btnOpcionTres);
 
         btnOpcionCuatro.setText("Mantenimiento de Usuarios");
+        btnOpcionCuatro.addActionListener(this::btnOpcionCuatroActionPerformed);
         panelBotones.add(btnOpcionCuatro);
 
         btnOpcionCinco.setText("Mantenimiento de Categorias");
+        btnOpcionCinco.addActionListener(this::btnOpcionCincoActionPerformed);
         panelBotones.add(btnOpcionCinco);
 
         btnOpcionSeis.setText("Mantenimiento de Origenes");
+        btnOpcionSeis.addActionListener(this::btnOpcionSeisActionPerformed);
         panelBotones.add(btnOpcionSeis);
 
         btnOpcionSiete.setText("Mantenimiento de Tiendas");
+        btnOpcionSiete.addActionListener(this::btnOpcionSieteActionPerformed);
         panelBotones.add(btnOpcionSiete);
 
         btnOpcionOcho.setText("Registro de Artículos");
@@ -95,9 +102,11 @@ public class PrincipalAdmin extends javax.swing.JFrame {
         panelBotones.add(btnOpcionOcho);
 
         btnOpcionNueve.setText("Registro de Usuarios");
+        btnOpcionNueve.addActionListener(this::btnOpcionNueveActionPerformed);
         panelBotones.add(btnOpcionNueve);
 
         btnOpcionDiez.setText("Ver datos de su Cuenta");
+        btnOpcionDiez.addActionListener(this::btnOpcionDiezActionPerformed);
         panelBotones.add(btnOpcionDiez);
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
@@ -203,6 +212,51 @@ public class PrincipalAdmin extends javax.swing.JFrame {
         ra.setVisible(true);
     }//GEN-LAST:event_btnOpcionOchoActionPerformed
 
+    private void btnOpcionNueveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpcionNueveActionPerformed
+        RegistroUsuarios v = new RegistroUsuarios(this, true);
+        v.setVisible(true);
+    }//GEN-LAST:event_btnOpcionNueveActionPerformed
+
+    private void btnOpcionDiezActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpcionDiezActionPerformed
+        DatosCuentas v = new DatosCuentas(this, true);
+        v.setVisible(true);
+    }//GEN-LAST:event_btnOpcionDiezActionPerformed
+
+    private void btnOpcionCuatroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpcionCuatroActionPerformed
+        MantUsuarios v = new MantUsuarios(this, true);
+        v.setVisible(true);
+    }//GEN-LAST:event_btnOpcionCuatroActionPerformed
+
+    private void btnOpcionCincoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpcionCincoActionPerformed
+        MantCategorias v = new MantCategorias(this, true);
+        v.setVisible(true);
+    }//GEN-LAST:event_btnOpcionCincoActionPerformed
+
+    private void btnOpcionSeisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpcionSeisActionPerformed
+        MantOrigenes v = new MantOrigenes(this, true);
+        v.setVisible(true);
+    }//GEN-LAST:event_btnOpcionSeisActionPerformed
+
+    private void btnOpcionSieteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpcionSieteActionPerformed
+        MantTiendas v = new MantTiendas(this, true);
+        v.setVisible(true);
+    }//GEN-LAST:event_btnOpcionSieteActionPerformed
+
+    private void btnOpcionUnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpcionUnoActionPerformed
+        ListaArticulo v = new ListaArticulo(this, true);
+        v.setVisible(true);
+    }//GEN-LAST:event_btnOpcionUnoActionPerformed
+
+    private void btnOpcionDosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpcionDosActionPerformed
+        ListaArticulosOferta v = new ListaArticulosOferta(this, true);
+        v.setVisible(true);
+    }//GEN-LAST:event_btnOpcionDosActionPerformed
+
+    private void btnOpcionTresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpcionTresActionPerformed
+        ListaArticulosDestacados v = new ListaArticulosDestacados(this, true);
+        v.setVisible(true);
+    }//GEN-LAST:event_btnOpcionTresActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -249,7 +303,4 @@ public class PrincipalAdmin extends javax.swing.JFrame {
     private javax.swing.JPanel panelPrincipal;
     private javax.swing.JTable tbUltimosArticulos;
     // End of variables declaration//GEN-END:variables
-
-
-
 }
