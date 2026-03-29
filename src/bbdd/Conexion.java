@@ -532,8 +532,8 @@ public class Conexion {
     
     /**
      * Método para imprimir los articulos que son destacados en un JTable donde
-     * tendra el codigo, nombre, categoria y precio de venta del producto o
-     * artículo sea si destacado es 'SI'. Solo sirve para el Administrador
+     * tendra el codigo, nombre, categoria, precio de venta del producto o
+     * artículo y destacado sea si destacado es 'SI'. Solo sirve para el Administrador
      * @param modelo JTable donde se cargará los datos
      */
     public static void ObtenerListadoArtDestacadoAdmin(DefaultTableModel modelo){
@@ -560,5 +560,34 @@ public class Conexion {
         }
     }
     
+    /**
+     * Método para imprimir los articulos que son destacados en un JTable donde
+     * tendra el codigo, nombre, categoria, precio de venta del producto o
+     * artículo y oferta sea si oferta es 'SI'. Solo sirve para el Administrador
+     * @param modelo JTable donde se cargará los datos
+     */
+    public static void ObtenerListadoArtOfertaAdmin(DefaultTableModel modelo){
+        modelo.setRowCount(0);
+        Object datos[] = new Object[5];
+        String consulta = "select codProducto, nombre, categoria, precio_venta, oferta "
+                          + "from producto where oferta = 'SI'";
+        Conectar();
+        try {
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(consulta);
+            while (rs.next()){
+                datos[0] = rs.getString(1);
+                datos[1] = rs.getString(2);
+                datos[2] = rs.getString(3);
+                datos[3] = rs.getDouble(4);
+                datos[4] = rs.getString(5);
+                modelo.addRow(datos);
+            }
+        } catch (SQLException ex) {
+            System.getLogger(Conexion.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } finally {
+            Cerrar();
+        }
+    }
     
 }// End Class
