@@ -5,7 +5,12 @@
 package vistas.vadmin;
 
 import bbdd.Conexion;
+import java.awt.Component;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import modelos.Usuarios;
 
 /**
  *
@@ -23,6 +28,7 @@ public class MantUsuarios extends javax.swing.JDialog {
         initComponents();
         DefaultTableModel modeloDatos = (DefaultTableModel) tbUsuarios.getModel();
         Conexion.ObtenerListadoUsuario(modeloDatos);
+        Conexion.CargarTienda(cboTiendas);
     }
 
     /**
@@ -45,7 +51,7 @@ public class MantUsuarios extends javax.swing.JDialog {
         panelDatos = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         txtCodProducto = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnActualizar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
@@ -73,6 +79,11 @@ public class MantUsuarios extends javax.swing.JDialog {
 
         panelUsuario.setBackground(new java.awt.Color(0, 0, 0));
         panelUsuario.setPreferredSize(new java.awt.Dimension(770, 450));
+        panelUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelUsuarioMouseClicked(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
@@ -94,6 +105,11 @@ public class MantUsuarios extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
+        tbUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbUsuariosMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tbUsuarios);
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
@@ -101,6 +117,11 @@ public class MantUsuarios extends javax.swing.JDialog {
         jLabel6.setText("DATOS DE USUARIOS");
 
         panelDatos.setBackground(new java.awt.Color(255, 255, 0));
+        panelDatos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelDatosMouseClicked(evt);
+            }
+        });
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel13.setText("CÓDIGO DE USUARIO:");
@@ -108,8 +129,8 @@ public class MantUsuarios extends javax.swing.JDialog {
         txtCodProducto.setEnabled(false);
         txtCodProducto.setName("CODIGO"); // NOI18N
 
-        jButton1.setText("Actualizar");
-        jButton1.setEnabled(false);
+        btnActualizar.setText("Actualizar");
+        btnActualizar.setEnabled(false);
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setText("NOMBRE COMPLETO:");
@@ -183,7 +204,7 @@ public class MantUsuarios extends javax.swing.JDialog {
                         .addComponent(cboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1)
+                            .addComponent(btnActualizar)
                             .addGroup(panelDatosLayout.createSequentialGroup()
                                 .addComponent(jLabel9)
                                 .addGap(18, 18, 18)
@@ -218,7 +239,7 @@ public class MantUsuarios extends javax.swing.JDialog {
                     .addComponent(jLabel9)
                     .addComponent(cboEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(btnActualizar)
                 .addContainerGap(10, Short.MAX_VALUE))
         );
 
@@ -295,6 +316,19 @@ public class MantUsuarios extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void tbUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbUsuariosMouseClicked
+        MostrarInformacion();
+        HabilitarCampos();
+    }//GEN-LAST:event_tbUsuariosMouseClicked
+
+    private void panelDatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelDatosMouseClicked
+        RestaurarFormulario();
+    }//GEN-LAST:event_panelDatosMouseClicked
+
+    private void panelUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelUsuarioMouseClicked
+        RestaurarFormulario();
+    }//GEN-LAST:event_panelUsuarioMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -333,11 +367,11 @@ public class MantUsuarios extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnActualizar;
     private javax.swing.JComboBox<String> cboEstado;
     private javax.swing.JComboBox<String> cboTiendas;
     private javax.swing.JComboBox<String> cboTipo;
     private javax.swing.JLabel image;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel15;
@@ -358,4 +392,58 @@ public class MantUsuarios extends javax.swing.JDialog {
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
-}
+
+    /**
+     * Método para mostrar información en el formulario en caso el usuario haya
+     * pulsado en una fila asi obteniendo el codigo y llamando a la conexion
+     * donde imprime los datos completos del usuario
+     */
+    public void MostrarInformacion() {
+        int fila = tbUsuarios.getSelectedRow();
+        String codigo = tbUsuarios.getValueAt(fila, 0).toString();
+        String usuarioSeleccionado = tbUsuarios.getValueAt(fila, 3).toString();
+        
+        Usuarios us = Conexion.MostrarFormularioUsuariosAdmin(usuarioSeleccionado);
+        
+        txtCodProducto.setText(codigo);
+        txtNombre.setText(us.getNombresCompletos());
+        cboTiendas.setSelectedItem(us.getTienda());
+        txtUsuario.setText(us.getUsuario());
+        pfContrasenya.setText(us.getPass());
+        cboTipo.setSelectedItem(us.getTipo());
+        cboEstado.setSelectedItem(us.getEstado());
+    }
+
+    /**
+     * Método para habilitar los campos que estan inactivo
+     */
+    public void HabilitarCampos() {
+        cboTiendas.setEnabled(true);
+        cboTipo.setEnabled(true);
+        cboEstado.setEnabled(true);
+        btnActualizar.setEnabled(true);
+        
+    }
+    
+    /**
+     * Método para restaurar formulario por defecto
+     */
+    public void RestaurarFormulario() {
+        for (Component c : panelDatos.getComponents()) {
+            if (c instanceof JTextField texto) {
+                texto.setText("");
+                texto.setEnabled(false);
+            }
+            if (c instanceof JComboBox combo) {
+                combo.setSelectedIndex(0);
+                combo.setEnabled(false);
+            }
+            if (c instanceof JButton) {
+                c.setEnabled(false);
+            }
+        }
+    }
+    
+    
+    
+}// End View
