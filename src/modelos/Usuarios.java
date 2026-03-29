@@ -34,7 +34,16 @@ public class Usuarios {
         this.usuario = usuario;
         this.pass = pass;
     }
-    
+
+    public Usuarios(String nombresCompletos, String tienda, String usuario, String pass, String tipo, String estado) {
+        this.nombresCompletos = nombresCompletos;
+        this.tienda = tienda;
+        this.usuario = usuario;
+        this.pass = pass;
+        this.tipo = tipo;
+        this.estado = estado;
+    }
+
     public String getNombresCompletos() {
         return nombresCompletos;
     }

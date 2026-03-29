@@ -35,7 +35,7 @@ public class Conexion {
     public static void Conectar(){
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3307/proyectoferreteria",
+            conn = DriverManager.getConnection("jdbc:mysql://localhost/proyectoferreteria",
                     "root","");
             System.out.println("Conexion abierta");
         } catch (ClassNotFoundException | SQLException ex) {
@@ -619,6 +619,38 @@ public class Conexion {
         } finally {
             Cerrar();
         }
+    }
+    
+    /**
+     * Método para mostrar la informacion completa del usuario seleccionado 
+     * llamando a todos los campos del usuario. Solo funciona en Administracion
+     * @param user Usuario seleccionado para mostrarlo en el formulario
+     * @return listado completo de datos de usuario para imprimirlo en los campos
+     */
+    public static Usuarios MostrarFormularioUsuariosAdmin(String user){
+        Usuarios u = null;
+        String consulta = "select nombre_apellidos, tienda, usuario, pass, tipo, estado "
+                        + "from usuarios where usuario='"+user+"'";
+        Conectar();
+        try {
+            PreparedStatement ps = conn.prepareStatement(consulta);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()){
+                u = new Usuarios(
+                        rs.getString(1), 
+                        rs.getString(2), 
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6)
+                );
+            }
+        } catch (SQLException ex) {
+            System.getLogger(Conexion.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } finally {
+            Cerrar();
+        }
+        return u;
     }
     
 }// End Class
