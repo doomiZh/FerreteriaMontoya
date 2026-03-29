@@ -5,6 +5,7 @@
 package vistas.vadmin;
 
 import bbdd.Conexion;
+import java.awt.Color;
 import java.awt.Component;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -145,6 +146,11 @@ public class ListaArticulo extends javax.swing.JDialog {
 
         txtNombre.setEnabled(false);
         txtNombre.setName("NOMBRE"); // NOI18N
+        txtNombre.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtNombreFocusGained(evt);
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel7.setText("NOMBRE:");
@@ -162,6 +168,11 @@ public class ListaArticulo extends javax.swing.JDialog {
         txtAreaDescripcion.setWrapStyleWord(true);
         txtAreaDescripcion.setEnabled(false);
         txtAreaDescripcion.setName("DESCRIPCION"); // NOI18N
+        txtAreaDescripcion.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtAreaDescripcionFocusGained(evt);
+            }
+        });
         jScrollPane1.setViewportView(txtAreaDescripcion);
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -410,6 +421,14 @@ public class ListaArticulo extends javax.swing.JDialog {
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         Eliminar();
     }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void txtNombreFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombreFocusGained
+        txtNombre.setBackground(Color.white);
+    }//GEN-LAST:event_txtNombreFocusGained
+
+    private void txtAreaDescripcionFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAreaDescripcionFocusGained
+        txtAreaDescripcion.setBackground(Color.white);
+    }//GEN-LAST:event_txtAreaDescripcionFocusGained
 
     /**
      * @param args the command line arguments
