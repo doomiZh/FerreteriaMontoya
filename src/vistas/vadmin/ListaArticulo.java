@@ -138,17 +138,20 @@ public class ListaArticulo extends javax.swing.JDialog {
         jLabel13.setText("CÓDIGO DE PRODUCTO:");
 
         txtPrecioVenta.setEnabled(false);
+        txtPrecioVenta.setName("PRECIO VENTA"); // NOI18N
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setText("CATEGORIA:");
 
         txtNombre.setEnabled(false);
+        txtNombre.setName("NOMBRE"); // NOI18N
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel7.setText("NOMBRE:");
 
         cboCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione" }));
         cboCategoria.setEnabled(false);
+        cboCategoria.setName("CATEGORIA"); // NOI18N
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel8.setText("DESCRIPCION:");
@@ -158,40 +161,47 @@ public class ListaArticulo extends javax.swing.JDialog {
         txtAreaDescripcion.setRows(5);
         txtAreaDescripcion.setWrapStyleWord(true);
         txtAreaDescripcion.setEnabled(false);
+        txtAreaDescripcion.setName("DESCRIPCION"); // NOI18N
         jScrollPane1.setViewportView(txtAreaDescripcion);
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setText("PRECIO COMPRA:");
 
         txtCodProducto.setEnabled(false);
+        txtCodProducto.setName("CODIGO"); // NOI18N
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel9.setText("STOCK:");
 
         txtPrecioCompra.setEnabled(false);
+        txtPrecioCompra.setName("PRECIO COMPRA"); // NOI18N
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel10.setText("PRECIO VENTA:");
 
         txtStock.setEnabled(false);
+        txtStock.setName("STOCK"); // NOI18N
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel11.setText("DESTACADO:");
 
         cboDestacado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "SI", "NO" }));
         cboDestacado.setEnabled(false);
+        cboDestacado.setName("DESTACADO"); // NOI18N
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel12.setText("OFERTA:");
 
         cboOferta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "SI", "NO" }));
         cboOferta.setEnabled(false);
+        cboOferta.setName("OFERTA"); // NOI18N
 
         jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel14.setText("ORIGEN:");
 
         cboOrigen.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione" }));
         cboOrigen.setEnabled(false);
+        cboOrigen.setName("ORIGEN"); // NOI18N
 
         btnActualizar.setText("Actualizar");
         btnActualizar.setEnabled(false);
@@ -199,6 +209,7 @@ public class ListaArticulo extends javax.swing.JDialog {
 
         btnEliminar.setText("Eliminar");
         btnEliminar.setEnabled(false);
+        btnEliminar.addActionListener(this::btnEliminarActionPerformed);
 
         javax.swing.GroupLayout panelDatosLayout = new javax.swing.GroupLayout(panelDatos);
         panelDatos.setLayout(panelDatosLayout);
@@ -312,17 +323,20 @@ public class ListaArticulo extends javax.swing.JDialog {
             .addGroup(panelArticuloLayout.createSequentialGroup()
                 .addGroup(panelArticuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelArticuloLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel5))
-                    .addGroup(panelArticuloLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 751, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelArticuloLayout.createSequentialGroup()
-                        .addGap(130, 130, 130)
                         .addGroup(panelArticuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(panelDatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6))))
-                .addContainerGap(13, Short.MAX_VALUE))
+                            .addGroup(panelArticuloLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel5))
+                            .addGroup(panelArticuloLayout.createSequentialGroup()
+                                .addGap(130, 130, 130)
+                                .addGroup(panelArticuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(panelDatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel6))))
+                        .addGap(0, 91, Short.MAX_VALUE))
+                    .addGroup(panelArticuloLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane2)))
+                .addContainerGap())
         );
         panelArticuloLayout.setVerticalGroup(
             panelArticuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -392,6 +406,10 @@ public class ListaArticulo extends javax.swing.JDialog {
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
         Actualizar();
     }//GEN-LAST:event_btnActualizarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        Eliminar();
+    }//GEN-LAST:event_btnEliminarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -464,7 +482,7 @@ public class ListaArticulo extends javax.swing.JDialog {
     private javax.swing.JTextField txtPrecioVenta;
     private javax.swing.JTextField txtStock;
     // End of variables declaration//GEN-END:variables
-
+   
     /**
      * Método para mostrar información en el formulario en caso el usuario haya
      * pulsado en una fila asi obteniendo el codigo y llamando a la conexion
@@ -473,7 +491,7 @@ public class ListaArticulo extends javax.swing.JDialog {
     public void MostrarInformacion() {
         int fila = tbArticulos.getSelectedRow();
         String codigo = tbArticulos.getValueAt(fila, 0).toString();
-
+        
         Productos pd = Conexion.MostrarFormularioArticulo(codigo);
 
         txtCodProducto.setText(codigo);
@@ -523,9 +541,9 @@ public class ListaArticulo extends javax.swing.JDialog {
     /**
      * Método para actualizar un registro de producto verificando si el nombre y
      * la descripcion no esten vacios, luego almacenando el producto en un
-     * objeto, al final actualizando el registro true si logra actualizar el
-     * campo y false enviando el mensaje de error. Al final restaura el
-     * formulario y actualiza el listado de articulos
+     * objeto, al final actualizando el registro en caso confirme la pregunta solicitada
+     * true si logra actualizar el campo y false enviando el mensaje de error. 
+     * Al final restaura el formulario y actualiza el listado de articulos
      */
     public void Actualizar() {
         if (Utilidades.ComprobarCampos(txtNombre, txtAreaDescripcion)) {
@@ -545,7 +563,7 @@ public class ListaArticulo extends javax.swing.JDialog {
                 if (Conexion.ActualizarArticulo(p)) {
                     JOptionPane.showMessageDialog(this, "El producto se ha actualizado correctamente.");
                 } else {
-                    JOptionPane.showMessageDialog(this, "Error en el registro del producto");
+                    JOptionPane.showMessageDialog(this, "Error en la actualización del producto");
                 }
             }
             RestaurarFormulario();
@@ -554,4 +572,28 @@ public class ListaArticulo extends javax.swing.JDialog {
         }
     }
 
+    /**
+     * Método para eliminar el producto seleccionado, obtiene el codigo del producto seleccionado,
+     * luego valida los campos, para que al final mande un mensaje al usuario si desea eliminar el producto
+     * seleccionado, si es asi lo elimina, caso contrario no pasa nada, se limpia
+     * el formulario y obtiene nuevamente la tabla por defecto.
+     */
+    public void Eliminar(){
+        int fila = tbArticulos.getSelectedRow();
+        String codigo = tbArticulos.getValueAt(fila, 0).toString();
+        if (Utilidades.ComprobarCampos(txtNombre, txtAreaDescripcion)) {
+            if (JOptionPane.showConfirmDialog(this, "¿Deseas eliminar este producto?",
+                    "CONFIRMAR DEPURACIÓN", JOptionPane.YES_NO_OPTION) == 0) {
+                if (Conexion.EliminarArticulo(codigo)) {
+                    JOptionPane.showMessageDialog(this, "El producto se ha eliminado correctamente.");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Error al depurar el producto");
+                }
+            }
+            RestaurarFormulario();
+            DefaultTableModel modeloDatos = (DefaultTableModel) tbArticulos.getModel();
+            Conexion.ObtenerListadoArticulo(modeloDatos);
+        }
+    }
+    
 }// End View
