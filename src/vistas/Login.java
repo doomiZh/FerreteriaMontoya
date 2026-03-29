@@ -211,14 +211,25 @@ public class Login extends javax.swing.JFrame {
     public static String usuario;
     public static String tipoUsuario;
     private String pass;
-    
+     
     /**
-     * Método para iniciar logado con el usuario y contraseña, revisamos si usuario es
-     * tipo admin o user abre distintas ventanas, en caso que no emite un mensaje
-     * de que el usuario no existe y se limpian los campos.
+     * Método para iniciar logado con el usuario y contraseña, validando los campos,
+     * luego revisamos si usuario es tipo admin o user 
+     * abre distintas ventanas, en caso que no emite un mensaje de que el usuario no existe 
+     * y se limpian los campos.
      * Además se inserta los accesos de los usuarios en la tabla de accesos de la bbdd.
      */
     public void IniciarSesion(){
+        if(txtUsuario.getText().isBlank()){
+            JOptionPane.showMessageDialog(this, "El campo USUARIO está vacío.\nPor favor rellena este campo.", "ALERTA", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        if(pfContrasenya.getPassword().length == 0){
+            JOptionPane.showMessageDialog(this, "El campo CONTRASEÑA está vacío.\nPor favor rellena este campo.", "ALERTA", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
         usuario = txtUsuario.getText();
         pass = new String(pfContrasenya.getPassword());
         if(Conexion.Acceder(usuario, pass)){
