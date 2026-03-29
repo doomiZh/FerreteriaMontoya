@@ -8,9 +8,11 @@ import bbdd.Conexion;
 import java.awt.Component;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import modelos.Usuarios;
+import modelos.Utilidades;
 
 /**
  *
@@ -131,6 +133,7 @@ public class MantUsuarios extends javax.swing.JDialog {
 
         btnActualizar.setText("Actualizar");
         btnActualizar.setEnabled(false);
+        btnActualizar.addActionListener(this::btnActualizarActionPerformed);
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setText("NOMBRE COMPLETO:");
@@ -329,6 +332,10 @@ public class MantUsuarios extends javax.swing.JDialog {
         RestaurarFormulario();
     }//GEN-LAST:event_panelUsuarioMouseClicked
 
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        Actualizar();
+    }//GEN-LAST:event_btnActualizarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -444,6 +451,35 @@ public class MantUsuarios extends javax.swing.JDialog {
         }
     }
     
+    /**
+     * Método para actualizar el usuario seleccionado, donde obtiene el usuario seleccionado
+     * luego verifica si los campos estan seleccionados, despues sube la info al constructor
+     * del usuario vacio para personalizar los tres campos combobox a editar, al final
+     * se manda una alerta para verificar si desea actualizar el usuario, actualiza
+     * el usuario si le da al si, caso contrario en caso diga que no. 
+     * Al final, restablece los campos y actualiza nuevamente la tabla.
+     */
+    public void Actualizar() {
+        int fila = tbUsuarios.getSelectedRow();
+        String user = tbUsuarios.getValueAt(fila, 3).toString();
+        if (Utilidades.ComprobarCampos(cboTiendas, cboTipo, cboEstado)) {
+            Usuarios u = new Usuarios();
+            u.setTienda(cboTiendas.getSelectedItem().toString());
+            u.setTipo(cboTipo.getSelectedItem().toString());
+            u.setEstado(cboEstado.getSelectedItem().toString());
+            if (JOptionPane.showConfirmDialog(this, "¿Deseas actualizar el usuario?",
+                    "CONFIRMAR ACTUALIZACIÓN", JOptionPane.YES_NO_OPTION) == 0) {
+                if (Conexion.ActualizarUsuario(u,user)) {
+                    JOptionPane.showMessageDialog(this, "El usuario se ha actualizado correctamente.");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Error en la actualización del usuario");
+                }
+            }
+            RestaurarFormulario();
+            DefaultTableModel modeloDatos = (DefaultTableModel) tbUsuarios.getModel();
+            Conexion.ObtenerListadoUsuario(modeloDatos);
+        }
+    }
     
     
 }// End View
