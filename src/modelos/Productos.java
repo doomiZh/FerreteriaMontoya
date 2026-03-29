@@ -13,7 +13,7 @@ import java.util.Date;
 public class Productos {
     private String codigo, nombre, categoria;
     private String descripcion;
-    private double precioVenta, precioCompra;
+    private double precioCompra, precioVenta;
     private int stock;
     private String origen, destacado, oferta;
     private Date fechaAlta;
@@ -21,13 +21,13 @@ public class Productos {
     public Productos() {
     }
 
-    public Productos(String codigo, String nombre, String categoria, String descripcion, double precioVenta, double precioCompra, int stock, String origen, String destacado, String oferta, Date fechaAlta) {
+    public Productos(String codigo, String nombre, String categoria, String descripcion, double precioCompra, double precioVenta, int stock, String origen, String destacado, String oferta, Date fechaAlta) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.categoria = categoria;
         this.descripcion = descripcion;
-        this.precioVenta = precioVenta;
         this.precioCompra = precioCompra;
+        this.precioVenta = precioVenta;
         this.stock = stock;
         this.origen = origen;
         this.destacado = destacado;
@@ -35,19 +35,33 @@ public class Productos {
         this.fechaAlta = fechaAlta;
     }
 
-    public Productos(String nombre, String categoria, String descripcion, 
-            double precioVenta, double precioCompra, int stock, String origen, String destacado, String oferta) {
+    public Productos(String nombre, String categoria, String descripcion, double precioCompra, double precioVenta, int stock, String origen, String destacado, String oferta) {
         this.nombre = nombre;
         this.categoria = categoria;
         this.descripcion = descripcion;
-        this.precioVenta = precioVenta;
         this.precioCompra = precioCompra;
+        this.precioVenta = precioVenta;
         this.stock = stock;
         this.origen = origen;
         this.destacado = destacado;
         this.oferta = oferta;
     }
 
+    public Productos(String codigo, String nombre, String categoria, String descripcion, double precioCompra, double precioVenta, int stock, String origen, String destacado, String oferta) {
+        this.codigo = codigo;
+        this.nombre = nombre;
+        this.categoria = categoria;
+        this.descripcion = descripcion;
+        this.precioCompra = precioCompra;
+        this.precioVenta = precioVenta;
+        this.stock = stock;
+        this.origen = origen;
+        this.destacado = destacado;
+        this.oferta = oferta;
+    }
+    
+    
+    
     public String getCodigo() {
         return codigo;
     }
