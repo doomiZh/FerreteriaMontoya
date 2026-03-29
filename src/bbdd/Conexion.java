@@ -508,4 +508,26 @@ public class Conexion {
         return false;
     }
     
+    /**
+     * Método para eliminar el artículo seleccionado de la base de datos al obtener 
+     * el codigo del articulo seleccionado.
+     * @param codigo Id del producto seleccionado
+     * @return true si se elimina correctamente producto, false si no.
+     */
+    public static boolean EliminarArticulo(String codigo){
+        String consulta = "DELETE from producto where codProducto=?";
+        Conectar();
+        try {
+            PreparedStatement ps = conn.prepareStatement(consulta);
+            ps.setString(1, codigo);
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            System.getLogger(Conexion.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } finally {
+            Cerrar();
+        }
+        return false;
+    }
+    
 }// End Class
