@@ -49,10 +49,10 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel1" min="-2" pref="300" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
-                  <Component id="jLabel2" min="-2" pref="123" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                  <Component id="image" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
               </Group>
-              <Component id="panelArticulo" alignment="0" max="32767" attributes="0"/>
+              <Component id="panelUsuario" alignment="0" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -61,12 +61,12 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                          <Component id="image" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Component id="jLabel1" min="-2" pref="94" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="panelArticulo" min="-2" pref="462" max="-2" attributes="0"/>
+                  <Component id="panelUsuario" min="-2" pref="462" max="-2" attributes="0"/>
                   <EmptySpace pref="8" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -82,15 +82,14 @@
             <Property name="text" type="java.lang.String" value="MANTENIMIENTO USUARIOS"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel2">
+        <Component class="javax.swing.JLabel" name="image">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/imagenes/logo_ferreteria_150_82.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="jLabel2"/>
           </Properties>
         </Component>
-        <Container class="javax.swing.JPanel" name="panelArticulo">
+        <Container class="javax.swing.JPanel" name="panelUsuario">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="0" type="rgb"/>
@@ -226,20 +225,17 @@
                                   <Component id="txtNombre" min="-2" pref="200" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="1" attributes="0">
-                                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                                      <Group type="102" attributes="0">
-                                          <Component id="jLabel8" min="-2" pref="37" max="-2" attributes="0"/>
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Component id="cboTipo" min="-2" pref="150" max="-2" attributes="0"/>
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
+                                  <Component id="jLabel8" min="-2" pref="37" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="cboTipo" min="-2" pref="150" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="cboEstado" min="-2" pref="150" max="-2" attributes="0"/>
-                                      <Component id="jButton2" min="-2" pref="83" max="-2" attributes="0"/>
+                                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                                      <Group type="102" attributes="0">
+                                          <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="cboEstado" min="-2" pref="150" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
                               </Group>
                           </Group>
@@ -280,10 +276,7 @@
                               <Component id="cboEstado" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                           <EmptySpace pref="10" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -295,23 +288,18 @@
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="12" style="1"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="C&#xd3;DIGO DE PRODUCTO:"/>
+                    <Property name="text" type="java.lang.String" value="C&#xd3;DIGO DE USUARIO:"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtCodProducto">
                   <Properties>
                     <Property name="enabled" type="boolean" value="false"/>
+                    <Property name="name" type="java.lang.String" value="CODIGO" noResource="true"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JButton" name="jButton1">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Actualizar"/>
-                    <Property name="enabled" type="boolean" value="false"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JButton" name="jButton2">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Eliminar"/>
                     <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                 </Component>
@@ -324,6 +312,10 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtNombre">
+                  <Properties>
+                    <Property name="enabled" type="boolean" value="false"/>
+                    <Property name="name" type="java.lang.String" value="NOMBRE COMPLETO" noResource="true"/>
+                  </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel15">
                   <Properties>
@@ -336,8 +328,12 @@
                 <Component class="javax.swing.JComboBox" name="cboTiendas">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="0"/>
+                      <StringArray count="1">
+                        <StringItem index="0" value="Seleccione"/>
+                      </StringArray>
                     </Property>
+                    <Property name="enabled" type="boolean" value="false"/>
+                    <Property name="name" type="java.lang.String" value="TIENDAS" noResource="true"/>
                   </Properties>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -352,6 +348,10 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtUsuario">
+                  <Properties>
+                    <Property name="enabled" type="boolean" value="false"/>
+                    <Property name="name" type="java.lang.String" value="USUARIO" noResource="true"/>
+                  </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel7">
                   <Properties>
@@ -362,6 +362,10 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JPasswordField" name="pfContrasenya">
+                  <Properties>
+                    <Property name="enabled" type="boolean" value="false"/>
+                    <Property name="name" type="java.lang.String" value="CONTRASE&#xd1;A" noResource="true"/>
+                  </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel8">
                   <Properties>
@@ -380,6 +384,8 @@
                         <StringItem index="2" value="user"/>
                       </StringArray>
                     </Property>
+                    <Property name="enabled" type="boolean" value="false"/>
+                    <Property name="name" type="java.lang.String" value="TIPO" noResource="true"/>
                   </Properties>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -402,6 +408,8 @@
                         <StringItem index="2" value="bloqueado"/>
                       </StringArray>
                     </Property>
+                    <Property name="enabled" type="boolean" value="false"/>
+                    <Property name="name" type="java.lang.String" value="ESTADO" noResource="true"/>
                   </Properties>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>

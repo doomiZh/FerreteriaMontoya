@@ -4,6 +4,9 @@
  */
 package vistas.vadmin;
 
+import bbdd.Conexion;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Marco Antonio
@@ -18,6 +21,8 @@ public class MantUsuarios extends javax.swing.JDialog {
     public MantUsuarios(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        DefaultTableModel modeloDatos = (DefaultTableModel) tbUsuarios.getModel();
+        Conexion.ObtenerListadoUsuario(modeloDatos);
     }
 
     /**
@@ -31,8 +36,8 @@ public class MantUsuarios extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        panelArticulo = new javax.swing.JPanel();
+        image = new javax.swing.JLabel();
+        panelUsuario = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbUsuarios = new javax.swing.JTable();
@@ -41,7 +46,6 @@ public class MantUsuarios extends javax.swing.JDialog {
         jLabel13 = new javax.swing.JLabel();
         txtCodProducto = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
@@ -65,11 +69,10 @@ public class MantUsuarios extends javax.swing.JDialog {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("MANTENIMIENTO USUARIOS");
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/logo_ferreteria_150_82.png"))); // NOI18N
-        jLabel2.setText("jLabel2");
+        image.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/logo_ferreteria_150_82.png"))); // NOI18N
 
-        panelArticulo.setBackground(new java.awt.Color(0, 0, 0));
-        panelArticulo.setPreferredSize(new java.awt.Dimension(770, 450));
+        panelUsuario.setBackground(new java.awt.Color(0, 0, 0));
+        panelUsuario.setPreferredSize(new java.awt.Dimension(770, 450));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
@@ -100,37 +103,52 @@ public class MantUsuarios extends javax.swing.JDialog {
         panelDatos.setBackground(new java.awt.Color(255, 255, 0));
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel13.setText("CÓDIGO DE PRODUCTO:");
+        jLabel13.setText("CÓDIGO DE USUARIO:");
 
         txtCodProducto.setEnabled(false);
+        txtCodProducto.setName("CODIGO"); // NOI18N
 
         jButton1.setText("Actualizar");
         jButton1.setEnabled(false);
 
-        jButton2.setText("Eliminar");
-        jButton2.setEnabled(false);
-
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setText("NOMBRE COMPLETO:");
+
+        txtNombre.setEnabled(false);
+        txtNombre.setName("NOMBRE COMPLETO"); // NOI18N
 
         jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel15.setText("TIENDAS:");
 
+        cboTiendas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione" }));
+        cboTiendas.setEnabled(false);
+        cboTiendas.setName("TIENDAS"); // NOI18N
+
         jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel16.setText("USUARIO:");
 
+        txtUsuario.setEnabled(false);
+        txtUsuario.setName("USUARIO"); // NOI18N
+
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel7.setText("CONTRASEÑA:");
+
+        pfContrasenya.setEnabled(false);
+        pfContrasenya.setName("CONTRASEÑA"); // NOI18N
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel8.setText("TIPO:");
 
         cboTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "admin", "user" }));
+        cboTipo.setEnabled(false);
+        cboTipo.setName("TIPO"); // NOI18N
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel9.setText("ESTADO:");
 
         cboEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "activo", "bloqueado" }));
+        cboEstado.setEnabled(false);
+        cboEstado.setName("ESTADO"); // NOI18N
 
         javax.swing.GroupLayout panelDatosLayout = new javax.swing.GroupLayout(panelDatos);
         panelDatos.setLayout(panelDatosLayout);
@@ -160,18 +178,16 @@ public class MantUsuarios extends javax.swing.JDialog {
                         .addGap(18, 18, 18)
                         .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelDatosLayout.createSequentialGroup()
-                        .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton1)
-                            .addGroup(panelDatosLayout.createSequentialGroup()
-                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(cboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel9)))
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(cboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cboEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jButton1)
+                            .addGroup(panelDatosLayout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addGap(18, 18, 18)
+                                .addComponent(cboEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(30, Short.MAX_VALUE))
         );
         panelDatosLayout.setVerticalGroup(
@@ -202,34 +218,32 @@ public class MantUsuarios extends javax.swing.JDialog {
                     .addComponent(jLabel9)
                     .addComponent(cboEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                .addComponent(jButton1)
                 .addContainerGap(10, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout panelArticuloLayout = new javax.swing.GroupLayout(panelArticulo);
-        panelArticulo.setLayout(panelArticuloLayout);
-        panelArticuloLayout.setHorizontalGroup(
-            panelArticuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelArticuloLayout.createSequentialGroup()
+        javax.swing.GroupLayout panelUsuarioLayout = new javax.swing.GroupLayout(panelUsuario);
+        panelUsuario.setLayout(panelUsuarioLayout);
+        panelUsuarioLayout.setHorizontalGroup(
+            panelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelUsuarioLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelArticuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(panelArticuloLayout.createSequentialGroup()
+                    .addGroup(panelUsuarioLayout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelArticuloLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelUsuarioLayout.createSequentialGroup()
                 .addContainerGap(82, Short.MAX_VALUE)
-                .addGroup(panelArticuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
                     .addComponent(panelDatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(83, 83, 83))
         );
-        panelArticuloLayout.setVerticalGroup(
-            panelArticuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelArticuloLayout.createSequentialGroup()
+        panelUsuarioLayout.setVerticalGroup(
+            panelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelUsuarioLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -249,9 +263,9 @@ public class MantUsuarios extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36))
-            .addComponent(panelArticulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(image)
+                .addGap(9, 9, 9))
+            .addComponent(panelUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -259,10 +273,10 @@ public class MantUsuarios extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel2))
+                        .addComponent(image))
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelArticulo, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panelUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(8, Short.MAX_VALUE))
         );
 
@@ -322,13 +336,12 @@ public class MantUsuarios extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> cboEstado;
     private javax.swing.JComboBox<String> cboTiendas;
     private javax.swing.JComboBox<String> cboTipo;
+    private javax.swing.JLabel image;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -337,8 +350,8 @@ public class MantUsuarios extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JPanel panelArticulo;
     private javax.swing.JPanel panelDatos;
+    private javax.swing.JPanel panelUsuario;
     private javax.swing.JPasswordField pfContrasenya;
     private javax.swing.JTable tbUsuarios;
     private javax.swing.JTextField txtCodProducto;
