@@ -35,7 +35,7 @@ public class Conexion {
     public static void Conectar(){
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://localhost/proyectoferreteria",
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3307/proyectoferreteria",
                     "root","");
             System.out.println("Conexion abierta");
         } catch (ClassNotFoundException | SQLException ex) {
@@ -581,6 +581,37 @@ public class Conexion {
                 datos[2] = rs.getString(3);
                 datos[3] = rs.getDouble(4);
                 datos[4] = rs.getString(5);
+                modelo.addRow(datos);
+            }
+        } catch (SQLException ex) {
+            System.getLogger(Conexion.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } finally {
+            Cerrar();
+        }
+    }
+    
+    /**
+     * Método para obtener el listado de todos los usuarios de la base de datos 
+     * y mostrarlo en la tabla del usuario
+     * @param modelo JTable a mostrar el listado total de usuarios
+     */
+    public static void ObtenerListadoUsuario(DefaultTableModel modelo){
+        modelo.setRowCount(0);
+        Object datos[] = new Object[8];
+        String consulta = "SELECT idUsuario, nombre_apellidos, tienda, usuario, pass, tipo, estado, fecha_alta FROM usuarios";
+        Conectar();
+        try {
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(consulta);
+            while (rs.next()) {
+                datos[0] = rs.getInt(1);
+                datos[1] = rs.getString(2);
+                datos[2] = rs.getString(3);
+                datos[3] = rs.getString(4);
+                datos[4] = rs.getString(5);
+                datos[5] = rs.getString(6);
+                datos[6] = rs.getString(7);
+                datos[7] = rs.getDate(8);
                 modelo.addRow(datos);
             }
         } catch (SQLException ex) {

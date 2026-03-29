@@ -34,7 +34,7 @@ public class Usuarios {
         this.usuario = usuario;
         this.pass = pass;
     }
-
+    
     public String getNombresCompletos() {
         return nombresCompletos;
     }
