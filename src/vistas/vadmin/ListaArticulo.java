@@ -5,15 +5,21 @@
 package vistas.vadmin;
 
 import bbdd.Conexion;
+import java.awt.Component;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
-
+import modelos.Productos;
+import modelos.Utilidades;
 
 /**
  *
  * @author Marco Antonio
  */
 public class ListaArticulo extends javax.swing.JDialog {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ListaArticulo.class.getName());
 
     /**
@@ -24,6 +30,8 @@ public class ListaArticulo extends javax.swing.JDialog {
         initComponents();
         DefaultTableModel modeloDatos = (DefaultTableModel) tbArticulos.getModel();
         Conexion.ObtenerListadoArticulo(modeloDatos);
+        Conexion.CargarCategoria(cboCategoria);
+        Conexion.CargarOrigen(cboOrigen);
     }
 
     /**
@@ -70,6 +78,7 @@ public class ListaArticulo extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("LISTA TOTAL DE ARTICULOS");
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 0, 0));
 
@@ -81,6 +90,11 @@ public class ListaArticulo extends javax.swing.JDialog {
 
         panelArticulo.setBackground(new java.awt.Color(0, 0, 0));
         panelArticulo.setPreferredSize(new java.awt.Dimension(770, 450));
+        panelArticulo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelArticuloMouseClicked(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
@@ -102,6 +116,11 @@ public class ListaArticulo extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
+        tbArticulos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbArticulosMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tbArticulos);
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
@@ -109,6 +128,11 @@ public class ListaArticulo extends javax.swing.JDialog {
         jLabel6.setText("DATOS DE ARTÍCULOS");
 
         panelDatos.setBackground(new java.awt.Color(255, 255, 0));
+        panelDatos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelDatosMouseClicked(evt);
+            }
+        });
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel13.setText("CÓDIGO DE PRODUCTO:");
@@ -123,6 +147,7 @@ public class ListaArticulo extends javax.swing.JDialog {
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel7.setText("NOMBRE:");
 
+        cboCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione" }));
         cboCategoria.setEnabled(false);
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -165,10 +190,12 @@ public class ListaArticulo extends javax.swing.JDialog {
         jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel14.setText("ORIGEN:");
 
+        cboOrigen.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione" }));
         cboOrigen.setEnabled(false);
 
         btnActualizar.setText("Actualizar");
         btnActualizar.setEnabled(false);
+        btnActualizar.addActionListener(this::btnActualizarActionPerformed);
 
         btnEliminar.setText("Eliminar");
         btnEliminar.setEnabled(false);
@@ -349,6 +376,23 @@ public class ListaArticulo extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void tbArticulosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbArticulosMouseClicked
+        MostrarInformacion();
+        HabilitarCampos();
+    }//GEN-LAST:event_tbArticulosMouseClicked
+
+    private void panelDatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelDatosMouseClicked
+        RestaurarFormulario();
+    }//GEN-LAST:event_panelDatosMouseClicked
+
+    private void panelArticuloMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelArticuloMouseClicked
+        RestaurarFormulario();
+    }//GEN-LAST:event_panelArticuloMouseClicked
+
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        Actualizar();
+    }//GEN-LAST:event_btnActualizarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -420,4 +464,94 @@ public class ListaArticulo extends javax.swing.JDialog {
     private javax.swing.JTextField txtPrecioVenta;
     private javax.swing.JTextField txtStock;
     // End of variables declaration//GEN-END:variables
-}
+
+    /**
+     * Método para mostrar información en el formulario en caso el usuario haya
+     * pulsado en una fila asi obteniendo el codigo y llamando a la conexion
+     * donde imprime los datos completos del artículo
+     */
+    public void MostrarInformacion() {
+        int fila = tbArticulos.getSelectedRow();
+        String codigo = tbArticulos.getValueAt(fila, 0).toString();
+
+        Productos pd = Conexion.MostrarFormularioArticulo(codigo);
+
+        txtCodProducto.setText(codigo);
+        txtNombre.setText(pd.getNombre());
+        cboCategoria.setSelectedItem(pd.getCategoria());
+        txtAreaDescripcion.setText(pd.getDescripcion());
+        txtPrecioCompra.setText(String.valueOf(pd.getPrecioCompra()));
+        txtPrecioVenta.setText(String.valueOf(pd.getPrecioVenta()));
+        txtStock.setText(String.valueOf(pd.getStock()));
+        cboOrigen.setSelectedItem(pd.getOrigen());
+        cboDestacado.setSelectedItem(pd.getDestacado());
+        cboOferta.setSelectedItem(pd.getOferta());
+    }
+
+    /**
+     * Método para habilitar los campos que estan inactivo
+     */
+    public void HabilitarCampos() {
+        txtNombre.setEnabled(true);
+        txtAreaDescripcion.setEnabled(true);
+        btnActualizar.setEnabled(true);
+        btnEliminar.setEnabled(true);
+    }
+
+    /**
+     * Método para restaurar formulario por defecto
+     */
+    public void RestaurarFormulario() {
+        for (Component c : panelDatos.getComponents()) {
+            if (c instanceof JTextField texto) {
+                texto.setText("");
+                texto.setEnabled(false);
+            }
+            if (c instanceof JComboBox combo) {
+                combo.setSelectedIndex(0);
+                combo.setEnabled(false);
+            }
+            if (c instanceof JButton) {
+                c.setEnabled(false);
+            }
+        }
+        txtAreaDescripcion.setText("");
+        txtAreaDescripcion.setEnabled(false);
+
+    }
+
+    /**
+     * Método para actualizar un registro de producto verificando si el nombre y
+     * la descripcion no esten vacios, luego almacenando el producto en un
+     * objeto, al final actualizando el registro true si logra actualizar el
+     * campo y false enviando el mensaje de error. Al final restaura el
+     * formulario y actualiza el listado de articulos
+     */
+    public void Actualizar() {
+        if (Utilidades.ComprobarCampos(txtNombre, txtAreaDescripcion)) {
+            Productos p = new Productos(
+                    txtCodProducto.getText(),
+                    txtNombre.getText(),
+                    cboCategoria.getSelectedItem().toString(),
+                    txtAreaDescripcion.getText(),
+                    Double.parseDouble(txtPrecioCompra.getText()),
+                    Double.parseDouble(txtPrecioVenta.getText()),
+                    Integer.parseInt(txtStock.getText()),
+                    cboOrigen.getSelectedItem().toString(),
+                    cboDestacado.getSelectedItem().toString(),
+                    cboOferta.getSelectedItem().toString());
+            if (JOptionPane.showConfirmDialog(this, "¿Deseas actualizar el producto?",
+                    "CONFIRMAR ACTUALIZACIÓN", JOptionPane.YES_NO_OPTION) == 0) {
+                if (Conexion.ActualizarArticulo(p)) {
+                    JOptionPane.showMessageDialog(this, "El producto se ha actualizado correctamente.");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Error en el registro del producto");
+                }
+            }
+            RestaurarFormulario();
+            DefaultTableModel modeloDatos = (DefaultTableModel) tbArticulos.getModel();
+            Conexion.ObtenerListadoArticulo(modeloDatos);
+        }
+    }
+
+}// End View

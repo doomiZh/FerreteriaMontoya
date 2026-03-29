@@ -543,8 +543,8 @@ public class RegistroArticulos extends javax.swing.JDialog {
                     txtNombre.getText(),
                     cboCategoria.getSelectedItem().toString(),
                     txtAreaDescripcion.getText(),
-                    Double.parseDouble(txtPrecioVenta.getText()),
                     Double.parseDouble(txtPrecioCompra.getText()),
+                    Double.parseDouble(txtPrecioVenta.getText()),
                     Integer.parseInt(txtStock.getText()),
                     cboOrigen.getSelectedItem().toString(),
                     cboDestacado.getSelectedItem().toString(),
@@ -555,7 +555,7 @@ public class RegistroArticulos extends javax.swing.JDialog {
                 txtCodProducto.setBackground(Color.red);
             } else {
                 if (Conexion.RegistrarArticulo(p)) {
-                    JOptionPane.showMessageDialog(this, "El producato se ha registrado correctamente");
+                    JOptionPane.showMessageDialog(this, "El producto se ha registrado correctamente");
                 } else {
                     JOptionPane.showMessageDialog(this, "Error en el registro del producto");
                 }
