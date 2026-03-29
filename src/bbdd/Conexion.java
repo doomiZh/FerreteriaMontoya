@@ -653,4 +653,31 @@ public class Conexion {
         return u;
     }
     
+    /**
+     * Método para actualizar el usuario de la base de datos
+     * donde obtiene el usuario seleccionado y actualiza los campos de tienda, tipo y estado 
+     * llamando a la clase Usuarios
+     * @param cli Clase Usuarios que almacena la tienda, tipo y estado
+     * @param user parametro para obtener el usuario seleccionado y enviarlo a la condicional
+     * de la consulta
+     * @return true si actualiza exitosamente y false en caso contrario.
+     */
+    public static boolean ActualizarUsuario(Usuarios cli, String user){
+        String consulta = "update usuarios set tienda=?, tipo=?, estado=? where usuario='"+user+"'";
+        Conectar();
+        try {
+            PreparedStatement ps = conn.prepareStatement(consulta);
+            ps.setString(1, cli.getTienda());
+            ps.setString(2, cli.getTipo());
+            ps.setString(3, cli.getEstado());
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            System.getLogger(Conexion.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } finally {
+            Cerrar();
+        }
+        return false;
+    }
+    
 }// End Class
