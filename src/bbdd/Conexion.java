@@ -173,6 +173,7 @@ public class Conexion {
      * @param modelo JTable donde se cargará los datos.
      */
     public static void ObtenerListadoArticulo(DefaultTableModel modelo){
+        modelo.setRowCount(0);
         Object datos[] = new Object[4];
         String consulta = "select codProducto, nombre, categoria, precio_venta from producto";
         Conectar();
@@ -390,7 +391,13 @@ public class Conexion {
         }
         return false;
     }
+    
+    /**
+     * Método para obtener el último articulo registrado para mostrarlo en un label
+     * @param lb JLabel para mostrar en la vista
+     */
     public static void ObtenerUltimoArticuloRegistrado (JLabel lb) {
+        lb.setText("");
         String consulta = "SELECT codProducto FROM producto order by codProducto desc limit 1";
         Conectar();
         try {
@@ -408,6 +415,14 @@ public class Conexion {
         }
     }
     
+    /**
+     * Método para comprobar si el producto a registrar ya existe o no para evaluarlo
+     * e insertar un nuevo artículo nuevo, evitando duplicidad en el registro.
+     * Tener en cuenta que significativamente el producto puede duplicarse al colocar
+     * al mismo nombre del producto, solo valida si es igual al codigo que quiere el usuario registrar.
+     * @param producto Id del producto obtenido en la base de datos
+     * @return true si existe producto, false si no existe el producto 
+     */
     public static boolean CompruebaProducto(String producto) {
         String consulta = "SELECT codProducto FROM producto WHERE codProducto =?";
         Conectar();
@@ -428,6 +443,13 @@ public class Conexion {
         return false;
     }
     
+    /**
+     * Método para registrar el artículo a la base de datos de Productos usando el constructor
+     * de la clase de Productos para registrar todos los campos.
+     * @param cli Clase productos para insertar uno nuevo
+     * @return true si el registro se realizo correctamente, false si no ha sido posible
+     * el registro del producto.
+     */
     public static  boolean RegistrarArticulo(Productos cli){
         String consulta = "INSERT INTO producto (codProducto, nombre, categoria, descripcion, precio_compra, precio_venta, stock, origen, destacado, oferta, fecha_alta) "
                     + "VALUES (?,?,?,?,?,?,?,?,?,?,?)";
@@ -446,6 +468,37 @@ public class Conexion {
             ps.setString(10, cli.getOferta());
             ps.setDate(11, new Date(cli.getFechaAlta().getTime()));
             ps.execute();
+            return true;
+        } catch (SQLException ex) {
+            System.getLogger(Conexion.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } finally {
+            Cerrar();
+        }
+        return false;
+    }
+    
+    /**
+     * Método para actualizar el artículo del producto seleccionado.
+     * @param cli Clase producto seleccionado en tablas
+     * @return true si se actualizó correctamente, false si no
+     */
+    public static boolean ActualizarArticulo(Productos cli){
+        String consulta = "UPDATE producto set nombre=?, categoria=?, descripcion=?, precio_compra=?, precio_venta=?, stock=?, origen=?, destacado=?, oferta=? "
+                    + "where codProducto=?";
+        Conectar();
+        try {
+            PreparedStatement ps = conn.prepareStatement(consulta);
+            ps.setString(1, cli.getNombre());
+            ps.setString(2, cli.getCategoria());
+            ps.setString(3, cli.getDescripcion());
+            ps.setDouble(4, cli.getPrecioCompra());
+            ps.setDouble(5, cli.getPrecioVenta());
+            ps.setInt(6, cli.getStock());
+            ps.setString(7, cli.getOrigen());
+            ps.setString(8, cli.getDestacado());
+            ps.setString(9, cli.getOferta());
+            ps.setString(10, cli.getCodigo());
+            ps.executeUpdate();
             return true;
         } catch (SQLException ex) {
             System.getLogger(Conexion.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
