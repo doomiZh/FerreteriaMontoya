@@ -471,11 +471,12 @@ public class MantUsuarios extends javax.swing.JDialog {
                     "CONFIRMAR ACTUALIZACIÓN", JOptionPane.YES_NO_OPTION) == 0) {
                 if (Conexion.ActualizarUsuario(u,user)) {
                     JOptionPane.showMessageDialog(this, "El usuario se ha actualizado correctamente.");
+                    RestaurarFormulario();
                 } else {
                     JOptionPane.showMessageDialog(this, "Error en la actualización del usuario");
+                    RestaurarFormulario();
                 }
             }
-            RestaurarFormulario();
             DefaultTableModel modeloDatos = (DefaultTableModel) tbUsuarios.getModel();
             Conexion.ObtenerListadoUsuario(modeloDatos);
         }
