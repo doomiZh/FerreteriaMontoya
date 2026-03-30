@@ -16,6 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.table.DefaultTableModel;
 import modelos.Accesos;
 import modelos.Categorias;
+import modelos.Origenes;
 import modelos.Productos;
 import modelos.Usuarios;
 
@@ -36,7 +37,7 @@ public class Conexion {
     public static void Conectar(){
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://localhost/proyectoferreteria",
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3307/proyectoferreteria",
                     "root","");
             System.out.println("Conexion abierta");
         } catch (ClassNotFoundException | SQLException ex) {
@@ -745,6 +746,81 @@ public class Conexion {
         try {
             PreparedStatement ps = conn.prepareStatement(consulta);
             ps.setString(1, cli.getCategoria());
+            ps.setString(2, cli.getDescripcion());
+            ps.execute();
+            return true;
+        } catch (SQLException ex) {
+            System.getLogger(Conexion.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } finally {
+            Cerrar();
+        }
+        return false;
+    }
+    
+    /**
+     * Método para obtener el total de origenes registradas en la base de datos
+     * y mostrarlas en un JTable a visualizar los origenes
+     * @param modelo JTable a visualizar el listado de origenes.
+     */
+    public static void ObtenerListadoOrigenes(DefaultTableModel modelo) {
+        modelo.setRowCount(0);
+        Object datos[] = new Object[2];
+        String consulta = "select origen, descripcion from origen";
+        Conectar();
+        try {
+            Statement st;
+            ResultSet rs;
+            st = conn.createStatement();
+            rs = st.executeQuery(consulta);
+            while (rs.next()) {
+                datos[0] = rs.getString(1);
+                datos[1] = rs.getString(2);
+                modelo.addRow(datos);
+            }
+        } catch (SQLException ex) {
+            System.getLogger(Conexion.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } finally {
+            Cerrar();
+        }
+    }
+    
+    /**
+     * Método para comprobar el origen si existe o no, asi evitar registrar 
+     * un origen nuevo.
+     * @param origen ID Origen existente en la base de datos
+     * @return true si existe, false en caso contrario.
+     */
+    public static boolean ComprobarOrigen(String origen){
+        String consulta = "select origen from origen where origen = ?";
+        Conectar();
+        try {
+            PreparedStatement ps;
+            ResultSet rs;
+            ps = conn.prepareStatement(consulta);
+            ps.setString(1, origen);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                return true;
+            }
+        } catch (SQLException ex) {
+            System.getLogger(Conexion.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } finally {
+            Cerrar();
+        }
+        return false;
+    }
+    
+    /**
+     * Método para registrar un nuevo origen en la base de datos
+     * @param cli Clase Origenes donde almacena los datos a registrar
+     * @return true si registro correctamente, false caso contrario.
+     */
+    public static boolean RegistrarOrigenes(Origenes cli){
+        String consulta = "INSERT INTO origen (origen, descripcion) VALUES (?,?)";
+        Conectar();
+        try {
+            PreparedStatement ps = conn.prepareStatement(consulta);
+            ps.setString(1, cli.getOrigen());
             ps.setString(2, cli.getDescripcion());
             ps.execute();
             return true;
