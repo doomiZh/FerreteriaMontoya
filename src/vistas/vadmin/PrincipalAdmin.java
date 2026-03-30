@@ -52,6 +52,22 @@ public class PrincipalAdmin extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbUltimosArticulos = new javax.swing.JTable();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        menuVer = new javax.swing.JMenu();
+        miTotalArticulos = new javax.swing.JMenuItem();
+        miArticulosDestacados = new javax.swing.JMenuItem();
+        miArticulosOferta = new javax.swing.JMenuItem();
+        menuMantenimiento = new javax.swing.JMenu();
+        miMantUsuarios = new javax.swing.JMenuItem();
+        miMantCategoria = new javax.swing.JMenuItem();
+        miMantOrigenes = new javax.swing.JMenuItem();
+        miMantTiendas = new javax.swing.JMenuItem();
+        menuRegistro = new javax.swing.JMenu();
+        miRegistoArticulos = new javax.swing.JMenuItem();
+        miRegistroUsuarios = new javax.swing.JMenuItem();
+        menuOpciones = new javax.swing.JMenu();
+        miDatosCuenta = new javax.swing.JMenuItem();
+        miSalir = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("FERRETERIA MONTOYA - Menú de administrador");
@@ -190,8 +206,70 @@ public class PrincipalAdmin extends javax.swing.JFrame {
                     .addComponent(lblBienvenida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(110, Short.MAX_VALUE))
+                .addContainerGap(87, Short.MAX_VALUE))
         );
+
+        menuVer.setText("Ver");
+
+        miTotalArticulos.setText("Total de artículos");
+        miTotalArticulos.addActionListener(this::miTotalArticulosActionPerformed);
+        menuVer.add(miTotalArticulos);
+
+        miArticulosDestacados.setText("Artículos deseados");
+        miArticulosDestacados.addActionListener(this::miArticulosDestacadosActionPerformed);
+        menuVer.add(miArticulosDestacados);
+
+        miArticulosOferta.setText("Artículos en oferta");
+        miArticulosOferta.addActionListener(this::miArticulosOfertaActionPerformed);
+        menuVer.add(miArticulosOferta);
+
+        jMenuBar1.add(menuVer);
+
+        menuMantenimiento.setText("Mantenimiento");
+
+        miMantUsuarios.setText("Usuarios");
+        miMantUsuarios.addActionListener(this::miMantUsuariosActionPerformed);
+        menuMantenimiento.add(miMantUsuarios);
+
+        miMantCategoria.setText("Categorias");
+        miMantCategoria.addActionListener(this::miMantCategoriaActionPerformed);
+        menuMantenimiento.add(miMantCategoria);
+
+        miMantOrigenes.setText("Origenes");
+        miMantOrigenes.addActionListener(this::miMantOrigenesActionPerformed);
+        menuMantenimiento.add(miMantOrigenes);
+
+        miMantTiendas.setText("Tiendas");
+        miMantTiendas.addActionListener(this::miMantTiendasActionPerformed);
+        menuMantenimiento.add(miMantTiendas);
+
+        jMenuBar1.add(menuMantenimiento);
+
+        menuRegistro.setText("Registros");
+
+        miRegistoArticulos.setText("Registrar artículos");
+        miRegistoArticulos.addActionListener(this::miRegistoArticulosActionPerformed);
+        menuRegistro.add(miRegistoArticulos);
+
+        miRegistroUsuarios.setText("Registrar usuarios");
+        miRegistroUsuarios.addActionListener(this::miRegistroUsuariosActionPerformed);
+        menuRegistro.add(miRegistroUsuarios);
+
+        jMenuBar1.add(menuRegistro);
+
+        menuOpciones.setText("Opciones");
+
+        miDatosCuenta.setText("Mis datos");
+        miDatosCuenta.addActionListener(this::miDatosCuentaActionPerformed);
+        menuOpciones.add(miDatosCuenta);
+
+        miSalir.setText("Salir");
+        miSalir.addActionListener(this::miSalirActionPerformed);
+        menuOpciones.add(miSalir);
+
+        jMenuBar1.add(menuOpciones);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -209,8 +287,8 @@ public class PrincipalAdmin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnOpcionOchoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpcionOchoActionPerformed
-        RegistroArticulos ra = new RegistroArticulos(this, true);
-        ra.setVisible(true);
+        RegistroArticulos v = new RegistroArticulos(this, true);
+        v.setVisible(true);
     }//GEN-LAST:event_btnOpcionOchoActionPerformed
 
     private void btnOpcionNueveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpcionNueveActionPerformed
@@ -258,6 +336,71 @@ public class PrincipalAdmin extends javax.swing.JFrame {
         v.setVisible(true);
     }//GEN-LAST:event_btnOpcionTresActionPerformed
 
+    private void miTotalArticulosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miTotalArticulosActionPerformed
+        // Menu Item - Ver - Total de artículos
+        ListaArticulo v = new ListaArticulo(this, true);
+        v.setVisible(true);
+    }//GEN-LAST:event_miTotalArticulosActionPerformed
+
+    private void miArticulosDestacadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miArticulosDestacadosActionPerformed
+        // Menu Item - Ver -  Artículos Destacados
+        ListaArticulosDestacados v = new ListaArticulosDestacados(this, true);
+        v.setVisible(true);
+    }//GEN-LAST:event_miArticulosDestacadosActionPerformed
+
+    private void miArticulosOfertaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miArticulosOfertaActionPerformed
+        // Menu Item - Ver -  Artículos Oferta
+        ListaArticulosOferta v = new ListaArticulosOferta(this, true);
+        v.setVisible(true);
+    }//GEN-LAST:event_miArticulosOfertaActionPerformed
+
+    private void miMantUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miMantUsuariosActionPerformed
+        // Menu Item - Mantenimiento - MantUsuarios
+        MantUsuarios v = new MantUsuarios(this, true);
+        v.setVisible(true);
+    }//GEN-LAST:event_miMantUsuariosActionPerformed
+
+    private void miMantCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miMantCategoriaActionPerformed
+        // Menu Item - Mantenimiento - MantCategoria
+        MantCategorias v = new MantCategorias(this, true);
+        v.setVisible(true);
+    }//GEN-LAST:event_miMantCategoriaActionPerformed
+
+    private void miMantOrigenesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miMantOrigenesActionPerformed
+        // Menu Item - Mantenimiento - MantOrigenes
+        MantOrigenes v = new MantOrigenes(this, true);
+        v.setVisible(true);
+    }//GEN-LAST:event_miMantOrigenesActionPerformed
+
+    private void miMantTiendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miMantTiendasActionPerformed
+        // Menu Item - Mantenimiento - MantTiendas
+        MantTiendas v = new MantTiendas(this, true);
+        v.setVisible(true);
+    }//GEN-LAST:event_miMantTiendasActionPerformed
+
+    private void miRegistoArticulosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miRegistoArticulosActionPerformed
+        // Menu Item - Registro - RegistroArticulo
+        RegistroArticulos v = new RegistroArticulos(this, true);
+        v.setVisible(true);
+    }//GEN-LAST:event_miRegistoArticulosActionPerformed
+
+    private void miRegistroUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miRegistroUsuariosActionPerformed
+        // Menu Item - Registro - RegistroUsuarios
+        RegistroUsuarios v = new RegistroUsuarios(this, true);
+        v.setVisible(true);
+    }//GEN-LAST:event_miRegistroUsuariosActionPerformed
+
+    private void miDatosCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miDatosCuentaActionPerformed
+        // Menu Item - Opciones - Mis datos
+        DatosCuentas v = new DatosCuentas(this, true);
+        v.setVisible(true);
+    }//GEN-LAST:event_miDatosCuentaActionPerformed
+
+    private void miSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSalirActionPerformed
+        // Menú Item - Opciones - Salir
+        System.exit(0);
+    }//GEN-LAST:event_miSalirActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -297,8 +440,24 @@ public class PrincipalAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel imagen;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblBienvenida;
+    private javax.swing.JMenu menuMantenimiento;
+    private javax.swing.JMenu menuOpciones;
+    private javax.swing.JMenu menuRegistro;
+    private javax.swing.JMenu menuVer;
+    private javax.swing.JMenuItem miArticulosDestacados;
+    private javax.swing.JMenuItem miArticulosOferta;
+    private javax.swing.JMenuItem miDatosCuenta;
+    private javax.swing.JMenuItem miMantCategoria;
+    private javax.swing.JMenuItem miMantOrigenes;
+    private javax.swing.JMenuItem miMantTiendas;
+    private javax.swing.JMenuItem miMantUsuarios;
+    private javax.swing.JMenuItem miRegistoArticulos;
+    private javax.swing.JMenuItem miRegistroUsuarios;
+    private javax.swing.JMenuItem miSalir;
+    private javax.swing.JMenuItem miTotalArticulos;
     private javax.swing.JPanel panelBotones;
     private javax.swing.JPanel panelFondo;
     private javax.swing.JPanel panelPrincipal;
