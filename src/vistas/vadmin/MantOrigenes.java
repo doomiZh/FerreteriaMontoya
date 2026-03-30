@@ -4,6 +4,13 @@
  */
 package vistas.vadmin;
 
+import bbdd.Conexion;
+import java.awt.Color;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import modelos.Origenes;
+import modelos.Utilidades;
+
 /**
  *
  * @author Marco Antonio
@@ -18,6 +25,8 @@ public class MantOrigenes extends javax.swing.JDialog {
     public MantOrigenes(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        DefaultTableModel modeloDatos = (DefaultTableModel) tbOrigenes.getModel();
+        Conexion.ObtenerListadoOrigenes(modeloDatos);
     }
 
     /**
@@ -92,9 +101,15 @@ public class MantOrigenes extends javax.swing.JDialog {
         jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel16.setText("ORIGEN:");
 
-        txtOrigen.setName("CATEGORIA"); // NOI18N
+        txtOrigen.setName("ORIGEN"); // NOI18N
+        txtOrigen.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtOrigenFocusGained(evt);
+            }
+        });
 
         btnRegistrar.setText("Registrar");
+        btnRegistrar.addActionListener(this::btnRegistrarActionPerformed);
 
         jLabel17.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel17.setText("DESCRIPCION:");
@@ -103,6 +118,11 @@ public class MantOrigenes extends javax.swing.JDialog {
         txtAreaDescripcion.setLineWrap(true);
         txtAreaDescripcion.setRows(5);
         txtAreaDescripcion.setWrapStyleWord(true);
+        txtAreaDescripcion.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtAreaDescripcionFocusGained(evt);
+            }
+        });
         jScrollPane1.setViewportView(txtAreaDescripcion);
 
         javax.swing.GroupLayout panelDatos1Layout = new javax.swing.GroupLayout(panelDatos1);
@@ -216,6 +236,18 @@ public class MantOrigenes extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+        Registrar();
+    }//GEN-LAST:event_btnRegistrarActionPerformed
+
+    private void txtOrigenFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtOrigenFocusGained
+        txtOrigen.setBackground(Color.white);
+    }//GEN-LAST:event_txtOrigenFocusGained
+
+    private void txtAreaDescripcionFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAreaDescripcionFocusGained
+        txtAreaDescripcion.setBackground(Color.white);
+    }//GEN-LAST:event_txtAreaDescripcionFocusGained
+
     /**
      * @param args the command line arguments
      */
@@ -270,4 +302,35 @@ public class MantOrigenes extends javax.swing.JDialog {
     private javax.swing.JTextArea txtAreaDescripcion;
     private javax.swing.JTextField txtOrigen;
     // End of variables declaration//GEN-END:variables
-}
+
+    /**
+     * Método para registrar la categoria para su uso. Primero comprueba los campos,
+     * luego inicializa el objeto para almacenar el registro, comprobamos si existe ya 
+     * esa categoria para luego registrar la categoria, al final restauramos los campos
+     * por defecto y actualizamos la tabla.
+     */
+    public void Registrar(){
+        if(Utilidades.ComprobarCampos(txtOrigen,txtAreaDescripcion)){
+            Origenes o = new Origenes();
+            o.setOrigen(txtOrigen.getText());
+            o.setDescripcion(txtAreaDescripcion.getText());
+            if (Conexion.ComprobarCategoria(txtOrigen.getText())){
+                JOptionPane.showMessageDialog(this, "El origen ya esta registrado.\nIngrese otro nuevo", "ALERTA", JOptionPane.WARNING_MESSAGE);
+                txtOrigen.setText("");
+                txtOrigen.setBackground(Color.red);
+            } else {
+                if(Conexion.RegistrarOrigenes(o)){
+                    JOptionPane.showMessageDialog(this, "Se realizo el registro del origen exitosamente.", "REGISTRO ORIGEN", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Hubo un error al registrar.\nRevise los campos.", "ERROR REGISTRO", JOptionPane.WARNING_MESSAGE);
+                }
+            }
+            txtOrigen.setText("");
+            txtAreaDescripcion.setText("");
+            DefaultTableModel modeloDatos = (DefaultTableModel) tbOrigenes.getModel();
+            Conexion.ObtenerListadoCategorias(modeloDatos);
+        }
+    }
+
+
+}// End View
