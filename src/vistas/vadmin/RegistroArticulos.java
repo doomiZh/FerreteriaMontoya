@@ -560,10 +560,11 @@ public class RegistroArticulos extends javax.swing.JDialog {
             } else {
                 if (Conexion.RegistrarArticulo(p)) {
                     JOptionPane.showMessageDialog(this, "El producto se ha registrado correctamente");
+                    RestaurarFormulario();
                 } else {
                     JOptionPane.showMessageDialog(this, "Error en el registro del producto");
+                    RestaurarFormulario();
                 }
-                RestaurarFormulario();
                 Conexion.ObtenerUltimoArticuloRegistrado(lblUltimoArticuloRegistrado);
             }
         }

@@ -65,7 +65,7 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="26" max="32767" attributes="0"/>
+                  <EmptySpace pref="42" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -98,18 +98,18 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="214" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="211" max="-2" attributes="0"/>
                       <Component id="panelCampos" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="215" max="32767" attributes="0"/>
+                      <EmptySpace pref="214" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
                       <Component id="panelCampos" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="85" max="32767" attributes="0"/>
+                      <EmptySpace pref="47" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -130,49 +130,52 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="txtNombre" max="32767" attributes="0"/>
+                                      <Component id="jLabel3" alignment="0" pref="283" max="32767" attributes="0"/>
+                                      <Component id="jLabel5" max="32767" attributes="0"/>
+                                      <Component id="jLabel6" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="96" max="-2" attributes="0"/>
+                                  <Component id="txtUsuario" min="-2" pref="150" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="96" max="-2" attributes="0"/>
+                                  <Component id="pfContrasenya" min="-2" pref="150" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="130" max="-2" attributes="0"/>
+                                  <Component id="btnActualizar" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
-                          <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="txtNombre" alignment="0" max="32767" attributes="0"/>
-                              <Component id="txtUsuario" alignment="0" pref="137" max="32767" attributes="0"/>
-                              <Component id="pfContrasenya" alignment="0" max="32767" attributes="0"/>
-                          </Group>
-                          <EmptySpace pref="26" max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="btnActualizar" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="126" max="-2" attributes="0"/>
+                          <EmptySpace pref="30" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace pref="64" max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtNombre" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtUsuario" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="pfContrasenya" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="txtNombre" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="txtUsuario" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="pfContrasenya" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="31" max="32767" attributes="0"/>
                           <Component id="btnActualizar" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -183,7 +186,8 @@
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="12" style="1"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Nombre y Apellidos:"/>
+                    <Property name="horizontalAlignment" type="int" value="0"/>
+                    <Property name="text" type="java.lang.String" value="NOMBRE COMPLETOS"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel5">
@@ -191,7 +195,8 @@
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="12" style="1"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Usuario:"/>
+                    <Property name="horizontalAlignment" type="int" value="0"/>
+                    <Property name="text" type="java.lang.String" value="USUARIOS"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel6">
@@ -199,7 +204,8 @@
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="12" style="1"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Contrase&#xf1;a:"/>
+                    <Property name="horizontalAlignment" type="int" value="0"/>
+                    <Property name="text" type="java.lang.String" value="CONTRASE&#xd1;A"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JButton" name="btnActualizar">
@@ -212,8 +218,12 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtNombre">
                   <Properties>
+                    <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="name" type="java.lang.String" value="NOMBRE COMPLETO" noResource="true"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtNombreFocusGained"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtUsuario">
                   <Properties>
@@ -225,6 +235,9 @@
                   <Properties>
                     <Property name="name" type="java.lang.String" value="CONTRASE&#xd1;A" noResource="true"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="pfContrasenyaFocusGained"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
