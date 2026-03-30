@@ -88,6 +88,18 @@ public class Utilidades {
     }
     
     /**
+     * Método para validar el campo del codigo del producto, asi verificar que
+     * el campo Codigo de producto se inserte iniciando el codigo P y lo despues sean minimo
+     * tres caracteres 0+0+0, maximo ilimitado
+     * @param campo JTextField a obtener el Id del Producto.
+     * @return true si es correcto, falso en caso sea el codigo invalido
+     */
+    public static boolean ValidarIdProducto(JTextField campo){
+        String patron = "^P\\d{3,}$";
+        return !campo.getText().matches(patron);
+    }
+    
+    /**
      * Método util para mandar una alerta sobre que el numero no es un entero, 
      * y el campo lo colorea a rojo
      * @param campo JTextField donde el numero no es un entero
@@ -95,6 +107,7 @@ public class Utilidades {
     public static void AlertaNumeroEntero(JTextField campo){
         JOptionPane.showMessageDialog(null, "El campo "+campo.getName()+" solo acepta números enteros.", "Número", JOptionPane.INFORMATION_MESSAGE);
         campo.setBackground(Color.red);
+        campo.setText("");
     }
     
     /**
@@ -105,6 +118,19 @@ public class Utilidades {
     public static void AlertaNumeroDecimal(JTextField campo){
         JOptionPane.showMessageDialog(null, "El campo "+campo.getName()+" solo acepta números decimales.", "Número", JOptionPane.INFORMATION_MESSAGE);
         campo.setBackground(Color.red);
+        campo.setText("");
+    }
+    
+    /**
+     * Método útil para mandar una alerta indicando el formato incorrecto del Id Producto.
+     * Se le indica el formato ejemplar para que el usuario tenga como guia para el proximo registro
+     * @param campo JTextField donde el id producto esta mal formateado
+     */
+    public static void AlertaIdProducto(JTextField campo){
+        JOptionPane.showMessageDialog(null, "El CODIGO DEL PRODUCTO no tiene el formato correcto.", "Codigo Producto", JOptionPane.WARNING_MESSAGE);
+        JOptionPane.showMessageDialog(null, "El formato debe iniciar con la P y luego los numeros.\nEjemplo: P001, P010, P099, P100, P1000, etc.", "Consejo", JOptionPane.INFORMATION_MESSAGE);
+        campo.setBackground(Color.red);
+        campo.setText("");
     }
     
 } //Fin de la clase
