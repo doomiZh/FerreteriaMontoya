@@ -18,6 +18,7 @@ import modelos.Accesos;
 import modelos.Categorias;
 import modelos.Origenes;
 import modelos.Productos;
+import modelos.Tiendas;
 import modelos.Usuarios;
 
 /**
@@ -822,6 +823,103 @@ public class Conexion {
             PreparedStatement ps = conn.prepareStatement(consulta);
             ps.setString(1, cli.getOrigen());
             ps.setString(2, cli.getDescripcion());
+            ps.execute();
+            return true;
+        } catch (SQLException ex) {
+            System.getLogger(Conexion.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } finally {
+            Cerrar();
+        }
+        return false;
+    }
+    
+    /**
+     * Método para obtener el total de tiendas registradas en la base de datos
+     * y mostrarlas en un JTable a visualizar las tiendas disponibles
+     * @param modelo JTable a visualizar el listado de tiendas.
+     */
+    public static void ObtenerListadoTiendas(DefaultTableModel modelo) {
+        modelo.setRowCount(0);
+        Object datos[] = new Object[3];
+        String consulta = "select denominacion, direccion, responsable from tiendas";
+        Conectar();
+        try {
+            Statement st;
+            ResultSet rs;
+            st = conn.createStatement();
+            rs = st.executeQuery(consulta);
+            while (rs.next()) {
+                datos[0] = rs.getString(1);
+                datos[1] = rs.getString(2);
+                datos[2] = rs.getString(3);
+                modelo.addRow(datos);
+            }
+        } catch (SQLException ex) {
+            System.getLogger(Conexion.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } finally {
+            Cerrar();
+        }
+    }
+    
+    /**
+     * Método para cargar los responsables de la tienda y cargarlos en el combo box.
+     * @param combo JComboBox del responsable de tienda para cargar sus datos
+     */
+    public static void CargarResponsablesTienda(JComboBox combo){
+        String consulta = "select nombre_apellidos from responsables_tienda";
+        Conectar();
+        try {
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(consulta);
+            while (rs.next()) {
+                combo.addItem(rs.getString(1));
+            }
+        } catch (SQLException ex) {
+            System.getLogger(Conexion.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } finally {
+            Cerrar();
+        }
+    }
+    
+    /**
+     * Método para comprobar las tiendas si existe o no, asi evitar registrar 
+     * una tienda nueva en la base de datos.
+     * @param denominacion ID Denominacion existente en la base de datos
+     * @return true si existe, false en caso contrario.
+     */
+    public static boolean ComprobarTiendas(String denominacion){
+        String consulta = "select denominacion from tiendas where denominacion = ?";
+        Conectar();
+        try {
+            PreparedStatement ps;
+            ResultSet rs;
+            ps = conn.prepareStatement(consulta);
+            ps.setString(1, denominacion);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                return true;
+            }
+        } catch (SQLException ex) {
+            System.getLogger(Conexion.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } finally {
+            Cerrar();
+        }
+        return false;
+    }
+    
+    /**
+     * Método para registrar una nueva tienda en la base de datos
+     * @param cli Clase Tiendas donde almacena los datos a registrar
+     * @return true si registró correctamente, false caso contrario.
+     */
+    public static boolean RegistrarTiendas(Tiendas cli){
+        String consulta = "INSERT INTO tiendas (denominacion, direccion, responsable) VALUES (?,?,?)";
+        Conectar();
+        try {
+            PreparedStatement ps = conn.prepareStatement(consulta);
+            ps.setString(1, cli.getDenominacion());
+            ps.setString(2, cli.getDireccion());
+            ps.setString(3, cli.getResponsable());
             ps.execute();
             return true;
         } catch (SQLException ex) {
