@@ -930,4 +930,58 @@ public class Conexion {
         return false;
     }
     
+    /**
+     * Método para comprobar el usuario registrado para evitar un nuevo registro del usuario
+     * @param user Nombre de usuario para comprobar si existe
+     * @return true si existe el usuario, false lo contrario
+     */
+    public static boolean CompruebaUsuario(String user){
+        String consulta = "SELECT usuario from usuarios where usuario = ?";
+        Conectar();
+        try {
+            PreparedStatement ps;
+            ResultSet rs;
+            ps = conn.prepareStatement(consulta);
+            ps.setString(1, user);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                return true;
+            }
+        } catch (SQLException ex) {
+            System.getLogger(Conexion.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } finally {
+            Cerrar();
+        }
+        return false;
+    }
+    
+    /**
+     * Método para registrar el usuario en la base de datos insertando el nombre completo del usuario,
+     * tienda, nombre de usuario, contraseña, su tipo, estado y fecha de alta de usuario
+     * @param cli Clase Usuario donde se almacena los datos a registrar
+     * @return true si se registro correctamente, false caso contrario.
+     */
+    public static boolean RegistrarUsuario(Usuarios cli){
+        String consulta = "INSERT INTO usuarios(nombre_apellidos, tienda, usuario, pass, tipo, estado, fecha_alta) "
+                    + "VALUES (?,?,?,?,?,?,?)";
+        Conectar();
+        try {
+            PreparedStatement ps = conn.prepareStatement(consulta);
+            ps.setString(1, cli.getNombresCompletos());
+            ps.setString(2, cli.getTienda());
+            ps.setString(3, cli.getUsuario());
+            ps.setString(4, cli.getPass());
+            ps.setString(5, cli.getTipo());
+            ps.setString(6, cli.getEstado());
+            ps.setDate(7, new Date(cli.getFechaAlta().getTime()));
+            ps.execute();
+            return true;
+        } catch (SQLException ex) {
+            System.getLogger(Conexion.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } finally {
+            Cerrar();
+        }
+        return false;
+    }
+    
 }// End Class
