@@ -15,6 +15,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.table.DefaultTableModel;
 import modelos.Accesos;
+import modelos.Categorias;
 import modelos.Productos;
 import modelos.Usuarios;
 
@@ -671,6 +672,81 @@ public class Conexion {
             ps.setString(2, cli.getTipo());
             ps.setString(3, cli.getEstado());
             ps.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            System.getLogger(Conexion.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } finally {
+            Cerrar();
+        }
+        return false;
+    }
+    
+    /**
+     * Método para obtener el total de categorias registradas en la base de datos
+     * y mostrarlas en un JTable a visualizar las categorias
+     * @param modelo JTable a visualizar el listado de categorias.
+     */
+    public static void ObtenerListadoCategorias(DefaultTableModel modelo) {
+        modelo.setRowCount(0);
+        Object datos[] = new Object[2];
+        String consulta = "select categoria, descripcion from categorias";
+        Conectar();
+        try {
+            Statement st;
+            ResultSet rs;
+            st = conn.createStatement();
+            rs = st.executeQuery(consulta);
+            while (rs.next()) {
+                datos[0] = rs.getString(1);
+                datos[1] = rs.getString(2);
+                modelo.addRow(datos);
+            }
+        } catch (SQLException ex) {
+            System.getLogger(Conexion.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } finally {
+            Cerrar();
+        }
+    }
+    
+    /**
+     * Método para comprobar la categoria si existe o no, asi evitar registrar 
+     * una categoria.
+     * @param categoria ID Categoria existente en la base de datos
+     * @return true si existe, false en caso contrario.
+     */
+    public static boolean ComprobarCategoria(String categoria){
+        String consulta = "select categoria from categorias where categoria = ?";
+        Conectar();
+        try {
+            PreparedStatement ps;
+            ResultSet rs;
+            ps = conn.prepareStatement(consulta);
+            ps.setString(1, categoria);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                return true;
+            }
+        } catch (SQLException ex) {
+            System.getLogger(Conexion.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } finally {
+            Cerrar();
+        }
+        return false;
+    }
+    
+    /**
+     * Método para registrar una nueva categoria en la base de datos
+     * @param cli Clase Categoria donde almacena los datos a registrar
+     * @return true si registro correctamente, false caso contrario.
+     */
+    public static boolean RegistrarCategoria(Categorias cli){
+        String consulta = "INSERT INTO categorias (categoria, descripcion) VALUES (?,?)";
+        Conectar();
+        try {
+            PreparedStatement ps = conn.prepareStatement(consulta);
+            ps.setString(1, cli.getCategoria());
+            ps.setString(2, cli.getDescripcion());
+            ps.execute();
             return true;
         } catch (SQLException ex) {
             System.getLogger(Conexion.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
