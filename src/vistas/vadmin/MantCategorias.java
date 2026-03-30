@@ -4,6 +4,13 @@
  */
 package vistas.vadmin;
 
+import bbdd.Conexion;
+import java.awt.Color;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import modelos.Categorias;
+import modelos.Utilidades;
+
 /**
  *
  * @author Marco Antonio
@@ -18,6 +25,8 @@ public class MantCategorias extends javax.swing.JDialog {
     public MantCategorias(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        DefaultTableModel modeloDatos = (DefaultTableModel) tbCategoria.getModel();
+        Conexion.ObtenerListadoCategorias(modeloDatos);
     }
 
     /**
@@ -93,13 +102,23 @@ public class MantCategorias extends javax.swing.JDialog {
         txtAreaDescripcion.setLineWrap(true);
         txtAreaDescripcion.setRows(5);
         txtAreaDescripcion.setWrapStyleWord(true);
-        txtAreaDescripcion.setEnabled(false);
         txtAreaDescripcion.setName("DESCRIPCION"); // NOI18N
+        txtAreaDescripcion.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtAreaDescripcionFocusGained(evt);
+            }
+        });
         jScrollPane1.setViewportView(txtAreaDescripcion);
 
         txtCategoria.setName("CATEGORIA"); // NOI18N
+        txtCategoria.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtCategoriaFocusGained(evt);
+            }
+        });
 
         btnRegistrar.setText("Registrar");
+        btnRegistrar.addActionListener(this::btnRegistrarActionPerformed);
 
         javax.swing.GroupLayout panelDatosLayout = new javax.swing.GroupLayout(panelDatos);
         panelDatos.setLayout(panelDatosLayout);
@@ -214,6 +233,18 @@ public class MantCategorias extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+        Registrar();
+    }//GEN-LAST:event_btnRegistrarActionPerformed
+
+    private void txtCategoriaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCategoriaFocusGained
+        txtCategoria.setBackground(Color.white);
+    }//GEN-LAST:event_txtCategoriaFocusGained
+
+    private void txtAreaDescripcionFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAreaDescripcionFocusGained
+        txtAreaDescripcion.setBackground(Color.white);
+    }//GEN-LAST:event_txtAreaDescripcionFocusGained
+
     /**
      * @param args the command line arguments
      */
@@ -268,4 +299,34 @@ public class MantCategorias extends javax.swing.JDialog {
     private javax.swing.JTextArea txtAreaDescripcion;
     private javax.swing.JTextField txtCategoria;
     // End of variables declaration//GEN-END:variables
-}
+
+    /**
+     * Método para registrar la categoria para su uso. Primero comprueba los campos,
+     * luego inicializa el objeto para almacenar el registro, comprobamos si existe ya 
+     * esa categoria para luego registrar la categoria, al final restauramos los campos
+     * por defecto y actualizamos la tabla.
+     */
+    public void Registrar(){
+        if(Utilidades.ComprobarCampos(txtCategoria,txtAreaDescripcion)){
+            Categorias c = new Categorias();
+            c.setCategoria(txtCategoria.getText());
+            c.setDescripcion(txtAreaDescripcion.getText());
+            if (Conexion.ComprobarCategoria(txtCategoria.getText())){
+                JOptionPane.showMessageDialog(this, "La categoria ya esta registrado.\nIngrese otra categoria", "ALERTA", JOptionPane.WARNING_MESSAGE);
+                txtCategoria.setText("");
+                txtCategoria.setBackground(Color.red);
+            } else {
+                if(Conexion.RegistrarCategoria(c)){
+                    JOptionPane.showMessageDialog(this, "Se realizo el registro de la categoria exitosamente.", "REGISTRO CATEGORIA", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Hubo un error al registrar.\nRevise los campos.", "ERROR REGISTRO", JOptionPane.WARNING_MESSAGE);
+                }
+            }
+            txtCategoria.setText("");
+            txtAreaDescripcion.setText("");
+            DefaultTableModel modeloDatos = (DefaultTableModel) tbCategoria.getModel();
+            Conexion.ObtenerListadoCategorias(modeloDatos);
+        }
+    }
+
+}// End View
