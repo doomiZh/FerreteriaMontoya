@@ -526,6 +526,10 @@ public class RegistroArticulos extends javax.swing.JDialog {
                 cboOrigen, 
                 cboDestacado, 
                 cboOferta)) {
+            if (Utilidades.ValidarIdProducto(txtCodProducto)){
+                Utilidades.AlertaIdProducto(txtCodProducto);
+                return;
+            }
             if (!Utilidades.ComprobarNumeroDecimal(txtPrecioCompra)) {
                 Utilidades.AlertaNumeroDecimal(txtPrecioCompra);
                 return;
@@ -539,7 +543,7 @@ public class RegistroArticulos extends javax.swing.JDialog {
                 return;
             }
             Productos p = new Productos(
-                    txtCodProducto.getText(),
+                    txtCodProducto.getText().toUpperCase(),
                     txtNombre.getText(),
                     cboCategoria.getSelectedItem().toString(),
                     txtAreaDescripcion.getText(),

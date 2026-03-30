@@ -118,6 +118,7 @@ public class MantOrigenes extends javax.swing.JDialog {
         txtAreaDescripcion.setLineWrap(true);
         txtAreaDescripcion.setRows(5);
         txtAreaDescripcion.setWrapStyleWord(true);
+        txtAreaDescripcion.setName("DESCRIPCION"); // NOI18N
         txtAreaDescripcion.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtAreaDescripcionFocusGained(evt);
