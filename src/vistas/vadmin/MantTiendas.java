@@ -4,6 +4,13 @@
  */
 package vistas.vadmin;
 
+import bbdd.Conexion;
+import java.awt.Color;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import modelos.Tiendas;
+import modelos.Utilidades;
+
 /**
  *
  * @author Marco Antonio
@@ -18,6 +25,9 @@ public class MantTiendas extends javax.swing.JDialog {
     public MantTiendas(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        DefaultTableModel modeloDatos = (DefaultTableModel) tbTiendas.getModel();
+        Conexion.ObtenerListadoTiendas(modeloDatos);
+        Conexion.CargarResponsablesTienda(cboResponsable);
     }
 
     /**
@@ -40,7 +50,7 @@ public class MantTiendas extends javax.swing.JDialog {
         panelDatos1 = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
         txtDenominacion = new javax.swing.JTextField();
-        btnRegistrar1 = new javax.swing.JButton();
+        btnRegistrar = new javax.swing.JButton();
         jLabel17 = new javax.swing.JLabel();
         txtDireccion = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
@@ -93,17 +103,31 @@ public class MantTiendas extends javax.swing.JDialog {
         jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel16.setText("DENOMINACIÓN:");
 
-        txtDenominacion.setName("CATEGORIA"); // NOI18N
+        txtDenominacion.setName("DENOMINACION"); // NOI18N
+        txtDenominacion.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtDenominacionFocusGained(evt);
+            }
+        });
 
-        btnRegistrar1.setText("Registrar");
+        btnRegistrar.setText("Registrar");
+        btnRegistrar.addActionListener(this::btnRegistrarActionPerformed);
 
         jLabel17.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel17.setText("DIRECCIÓN:");
 
-        txtDireccion.setName("CATEGORIA"); // NOI18N
+        txtDireccion.setName("DIRECCION"); // NOI18N
+        txtDireccion.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtDireccionFocusGained(evt);
+            }
+        });
 
         jLabel18.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel18.setText("RESPONSABLE:");
+
+        cboResponsable.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione" }));
+        cboResponsable.setName("RESPONSABLE"); // NOI18N
 
         javax.swing.GroupLayout panelDatos1Layout = new javax.swing.GroupLayout(panelDatos1);
         panelDatos1.setLayout(panelDatos1Layout);
@@ -111,27 +135,23 @@ public class MantTiendas extends javax.swing.JDialog {
             panelDatos1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelDatos1Layout.createSequentialGroup()
                 .addGap(155, 155, 155)
-                .addComponent(btnRegistrar1)
+                .addComponent(btnRegistrar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDatos1Layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addGroup(panelDatos1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(panelDatos1Layout.createSequentialGroup()
-                        .addComponent(jLabel16)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtDenominacion, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelDatos1Layout.createSequentialGroup()
-                        .addGroup(panelDatos1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelDatos1Layout.createSequentialGroup()
-                                .addComponent(jLabel17)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDatos1Layout.createSequentialGroup()
-                                .addComponent(jLabel18)
-                                .addGap(32, 32, 32)))
-                        .addGroup(panelDatos1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtDireccion, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
-                            .addComponent(cboResponsable, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(50, 50, 50))
+                .addGap(30, 30, 30)
+                .addGroup(panelDatos1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtDenominacion, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelDatos1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel17)
+                        .addGroup(panelDatos1Layout.createSequentialGroup()
+                            .addGroup(panelDatos1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel16)
+                                .addComponent(jLabel18))
+                            .addGap(32, 32, 32)
+                            .addGroup(panelDatos1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cboResponsable, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(30, 30, 30))
         );
         panelDatos1Layout.setVerticalGroup(
             panelDatos1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -149,7 +169,7 @@ public class MantTiendas extends javax.swing.JDialog {
                     .addComponent(jLabel18)
                     .addComponent(cboResponsable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(25, 25, 25)
-                .addComponent(btnRegistrar1)
+                .addComponent(btnRegistrar)
                 .addContainerGap(30, Short.MAX_VALUE))
         );
 
@@ -160,17 +180,17 @@ public class MantTiendas extends javax.swing.JDialog {
             .addGroup(panelTiendasLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelTiendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 758, Short.MAX_VALUE)
                     .addGroup(panelTiendasLayout.createSequentialGroup()
                         .addComponent(jLabel14)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelTiendasLayout.createSequentialGroup()
-                .addContainerGap(195, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panelTiendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel15)
                     .addComponent(panelDatos1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(185, 185, 185))
+                .addGap(196, 196, 196))
         );
         panelTiendasLayout.setVerticalGroup(
             panelTiendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -225,6 +245,18 @@ public class MantTiendas extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void txtDenominacionFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDenominacionFocusGained
+        txtDenominacion.setBackground(Color.white);
+    }//GEN-LAST:event_txtDenominacionFocusGained
+
+    private void txtDireccionFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDireccionFocusGained
+        txtDireccion.setBackground(Color.white);
+    }//GEN-LAST:event_txtDireccionFocusGained
+
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+        Registrar();
+    }//GEN-LAST:event_btnRegistrarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -263,7 +295,7 @@ public class MantTiendas extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnRegistrar1;
+    private javax.swing.JButton btnRegistrar;
     private javax.swing.JComboBox<String> cboResponsable;
     private javax.swing.JLabel imagen;
     private javax.swing.JLabel jLabel14;
@@ -280,4 +312,36 @@ public class MantTiendas extends javax.swing.JDialog {
     private javax.swing.JTextField txtDenominacion;
     private javax.swing.JTextField txtDireccion;
     // End of variables declaration//GEN-END:variables
-}
+
+    /**
+     * Método para registrar las tiendas para su uso. Primero comprueba los campos,
+     * luego inicializa el objeto para almacenar el registro, comprobamos si existe ya 
+     * esa tienda para luego registrar una nueva tienda, al final restauramos los campos
+     * por defecto y actualizamos la tabla.
+     */
+    public void Registrar(){
+        if(Utilidades.ComprobarCampos(txtDenominacion, txtDireccion, cboResponsable)){
+            Tiendas t = new Tiendas();
+            t.setDenominacion(txtDenominacion.getText());
+            t.setDireccion(txtDireccion.getText());
+            t.setResponsable(cboResponsable.getSelectedItem().toString());
+            if (Conexion.ComprobarTiendas(txtDenominacion.getText())){
+                JOptionPane.showMessageDialog(this, "Esta tienda ya esta registrada en el sistema.\nIngrese otra dato", "ALERTA", JOptionPane.WARNING_MESSAGE);
+                txtDenominacion.setText("");
+                txtDenominacion.setBackground(Color.red);
+            } else {
+                if(Conexion.RegistrarTiendas(t)){
+                    JOptionPane.showMessageDialog(this, "Se realizo el registro de la tienda exitosamente.", "REGISTRO TIENDAS", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Hubo un error al registrar.\nRevise los campos.", "ERROR REGISTRO", JOptionPane.WARNING_MESSAGE);
+                }
+            }
+            txtDenominacion.setText("");
+            txtDireccion.setText("");
+            cboResponsable.setSelectedIndex(0);
+            DefaultTableModel modeloDatos = (DefaultTableModel) tbTiendas.getModel();
+            Conexion.ObtenerListadoTiendas(modeloDatos);
+        }
+    }
+
+}// End View
