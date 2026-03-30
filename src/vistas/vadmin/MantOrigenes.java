@@ -304,9 +304,9 @@ public class MantOrigenes extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     /**
-     * Método para registrar la categoria para su uso. Primero comprueba los campos,
+     * Método para registrar el origen para su uso. Primero comprueba los campos,
      * luego inicializa el objeto para almacenar el registro, comprobamos si existe ya 
-     * esa categoria para luego registrar la categoria, al final restauramos los campos
+     * esa categoria para luego registrar un nuevo origen, al final restauramos los campos
      * por defecto y actualizamos la tabla.
      */
     public void Registrar(){
@@ -314,7 +314,7 @@ public class MantOrigenes extends javax.swing.JDialog {
             Origenes o = new Origenes();
             o.setOrigen(txtOrigen.getText());
             o.setDescripcion(txtAreaDescripcion.getText());
-            if (Conexion.ComprobarCategoria(txtOrigen.getText())){
+            if (Conexion.ComprobarOrigen(txtOrigen.getText())){
                 JOptionPane.showMessageDialog(this, "El origen ya esta registrado.\nIngrese otro nuevo", "ALERTA", JOptionPane.WARNING_MESSAGE);
                 txtOrigen.setText("");
                 txtOrigen.setBackground(Color.red);
@@ -328,7 +328,7 @@ public class MantOrigenes extends javax.swing.JDialog {
             txtOrigen.setText("");
             txtAreaDescripcion.setText("");
             DefaultTableModel modeloDatos = (DefaultTableModel) tbOrigenes.getModel();
-            Conexion.ObtenerListadoCategorias(modeloDatos);
+            Conexion.ObtenerListadoOrigenes(modeloDatos);
         }
     }
 
