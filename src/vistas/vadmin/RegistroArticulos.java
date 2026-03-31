@@ -31,6 +31,8 @@ public class RegistroArticulos extends javax.swing.JDialog {
         Conexion.ObtenerUltimoArticuloRegistrado(lblUltimoArticuloRegistrado);
         Conexion.CargarCategoria(cboCategoria);
         Conexion.CargarOrigen(cboOrigen);
+        txtPrecioCompra.setText("0.00");
+        txtPrecioVenta.setText("0.00");
     }
 
     /**
@@ -139,6 +141,11 @@ public class RegistroArticulos extends javax.swing.JDialog {
                 txtPrecioCompraFocusGained(evt);
             }
         });
+        txtPrecioCompra.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtPrecioCompraKeyReleased(evt);
+            }
+        });
 
         txtStock.setName("STOCK"); // NOI18N
         txtStock.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -159,6 +166,7 @@ public class RegistroArticulos extends javax.swing.JDialog {
         jLabel27.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel27.setText("PRECIO VENTA:");
 
+        txtPrecioVenta.setEnabled(false);
         txtPrecioVenta.setName("PRECIO VENTA"); // NOI18N
         txtPrecioVenta.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -420,6 +428,19 @@ public class RegistroArticulos extends javax.swing.JDialog {
         txtStock.setBackground(Color.white);
     }//GEN-LAST:event_txtStockFocusGained
 
+    private void txtPrecioCompraKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioCompraKeyReleased
+        String monto = txtPrecioCompra.getText();
+        Productos p = new Productos();
+        if (monto.isBlank()){
+            JOptionPane.showMessageDialog(this, "El campo no debe estar vacio.\nEscribe un monto.");
+            txtPrecioCompra.setBackground(Color.red);
+            txtPrecioCompra.setText("0.00");
+            txtPrecioVenta.setText("0.00");
+        } else {
+            txtPrecioVenta.setText(String.valueOf(p.ObtenerPrecioVenta(monto)));
+        }
+    }//GEN-LAST:event_txtPrecioCompraKeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -505,8 +526,10 @@ public class RegistroArticulos extends javax.swing.JDialog {
             }
         }
         txtAreaDescripcion.setText("");
+        txtPrecioCompra.setText("0.00");
+        txtPrecioVenta.setText("0.00");
     }
-    
+        
     /**
      * Método para registrar el artículo primero validando los campos de manera escalonada,
      * luego inicializando el producto uniendo los campos dentro de la inicializacion del objeto,
@@ -569,5 +592,5 @@ public class RegistroArticulos extends javax.swing.JDialog {
             }
         }
     }// End Method Registrar();
-
+ 
 }// End View
