@@ -40,7 +40,6 @@ public class Conexion {
             Class.forName("com.mysql.jdbc.Driver");
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3307/proyectoferreteria",
                     "root","");
-            System.out.println("Conexion abierta");
         } catch (ClassNotFoundException | SQLException ex) {
             System.getLogger(Conexion.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
@@ -52,7 +51,6 @@ public class Conexion {
     public static void Cerrar(){
         try {
             conn.close();
-            System.out.println("Conexion cerrada");
         } catch (SQLException ex) {
             System.getLogger(Conexion.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
