@@ -5,6 +5,7 @@
 package modelos;
 
 import java.util.Date;
+import javax.swing.JOptionPane;
 
 /**
  * Clase que almacena los productos o artículos de la base de datos
@@ -149,5 +150,25 @@ public class Productos {
     public void setFechaAlta(Date fechaAlta) {
         this.fechaAlta = fechaAlta;
     }
-        
+    
+    /**
+     * Método del la clase de Producto donde obtienes el precio de venta calculado 
+     * mediante el incremento del 30% a la compra y añadiendo el %IVA.
+     * @param pc Precio de compra registrado en el dato.
+     * @return String. Precio de venta automático.
+     */
+    public Double ObtenerPrecioVenta(String pc){
+        final double IVA = 0.21;
+        double resultado;
+        Double numero = 0.00;
+        try {
+            numero = Double.parseDouble(pc);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Debe teclear caracteres numéricos.\nIntentelo nuevamente");
+        }
+        double incremento= numero+(numero*0.30);
+        resultado = incremento+(incremento*IVA);
+        return resultado;
+    }
+    
 }// End Class

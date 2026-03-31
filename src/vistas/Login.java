@@ -230,7 +230,7 @@ public class Login extends javax.swing.JFrame {
             return;
         }
         
-        usuario = txtUsuario.getText();
+        usuario = txtUsuario.getText().toLowerCase();
         pass = new String(pfContrasenya.getPassword());
         if(Conexion.Acceder(usuario, pass)){
             tipoUsuario = Conexion.RecuperarTipo(usuario);
