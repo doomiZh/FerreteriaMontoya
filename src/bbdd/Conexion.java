@@ -38,8 +38,8 @@ public class Conexion {
     public static void Conectar(){
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3307/proyectoferreteria",
-                    "root","");
+            conn = DriverManager.getConnection("jdbc:mysql://145.14.151.51/u812167471_pro_ferreteria",
+                    "u812167471_pro_ferreteria","2026-Ferreteria");
         } catch (ClassNotFoundException | SQLException ex) {
             System.getLogger(Conexion.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
