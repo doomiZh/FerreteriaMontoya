@@ -557,6 +557,11 @@ public class RegistroArticulos extends javax.swing.JDialog {
                 Utilidades.AlertaNumeroDecimal(txtPrecioCompra);
                 return;
             }
+            if("0.00".equals(txtPrecioCompra.getText())){
+                JOptionPane.showMessageDialog(this, "Debes de colocar un valor","PRECIO DE COMPRA",JOptionPane.INFORMATION_MESSAGE);
+                txtPrecioCompra.setBackground(Color.red);
+                return;
+            }
             if (!Utilidades.ComprobarNumeroDecimal(txtPrecioVenta)) {
                 Utilidades.AlertaNumeroDecimal(txtPrecioVenta);
                 return;
@@ -564,7 +569,7 @@ public class RegistroArticulos extends javax.swing.JDialog {
             if (!Utilidades.ComprobarNumeroEntero(txtStock)) {
                 Utilidades.AlertaNumeroEntero(txtStock);
                 return;
-            }
+            }       
             Productos p = new Productos(
                     txtCodProducto.getText().toUpperCase(),
                     txtNombre.getText(),
